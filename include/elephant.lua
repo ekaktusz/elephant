@@ -36,13 +36,13 @@ function draw_elephant()
 	end
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.d==2,false)
 	--szem
-	if (e.f==0 ) then
-		rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
-		rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
-	else 
-		rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
-		rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
-	end
+	--if (e.f==0 ) then
+	--	rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
+	--	rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
+	--else 
+	--	rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
+	--	rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
+	--end
 end
 
 function update_elephant_d()
