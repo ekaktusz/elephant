@@ -53,11 +53,14 @@ function update_game()
 	end
 
 	if current_lvl==1 then tb_update() end
+	
+	updateparts()
 end
 
 function draw_game()
 	cls()
 	map(0,0)
+	drawparts()
 	--spr(140,112,32,2,2) -- mogyoro
 	--spr(64,16,16,4,4)   -- elefant
 	draw_wall()
@@ -73,6 +76,7 @@ function draw_game()
 	draw_door()
 	draw_water()
 	draw_h()
+	
 	if current_lvl==1 then tb_draw() end 
 		
 	if not loaded() then

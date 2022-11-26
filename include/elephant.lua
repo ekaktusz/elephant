@@ -153,6 +153,8 @@ function update_elephant()
 		or e.y+32<0) then
 			finished=true
 	end
+
+	
 end
 
 function move_elephant()
@@ -168,12 +170,16 @@ function move_elephant()
 	
 	if (e.finish) then
 		if (e.d==1) then
+			spawntrail(e.x,e.y+32,2,2,5,6)
 			e.x+=e.spd
 		elseif (e.d==2) then
+			spawntrail(e.x+32,e.y+32,2,2,5,6)
 			e.x-=e.spd
 		elseif (e.d==3) then
+			spawntrail(e.x+16,e.y+32,8,8,5,6)
 			e.y-=e.spd
 		elseif (e.d==4) then
+			spawntrail(e.x+16,e.y,8,8,5,6)
 			e.y+=e.spd
 		end
 		return
@@ -181,15 +187,19 @@ function move_elephant()
 
 	if (e.d==1) and ecan_move('r') and (e.should_move or e.seen_player)
 		then --jobbra
+		spawntrail(e.x,e.y+32,2,2,5,6)
 		e.x+=e.spd
 	elseif (e.d==2) and ecan_move('l') and (e.should_move or e.seen_player)
 		then --balra
+			spawntrail(e.x+32,e.y+32,2,2,5,6)
 		e.x-=e.spd
 	elseif (e.d==3) and ecan_move('u') and (e.should_move or e.seen_player)
 		then --fel
+			spawntrail(e.x+16,e.y+32,8,8,5,6)
 		e.y-=e.spd
 	elseif (e.d==4) and ecan_move('d') and (e.should_move or e.seen_player)
 		then --le
+			spawntrail(e.x+16,e.y,8,8,5,6)
 		e.y+=e.spd
 	end
 end

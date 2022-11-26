@@ -25,6 +25,8 @@ end
 
 function draw_player()
 	if (p.walking) then anim_player() end
+
+	--drawparts()
 	
  palt(0,true)   --hide black
  --0 left, 1 right, 2 up, 3 down
@@ -47,6 +49,7 @@ function anim_player()
 end
 
 function update_player()
+	
 	move_player()
 	if (btnp(5)) then
 		--handle nut taking
@@ -60,6 +63,9 @@ function update_player()
 	end
 	if (btnp(0) or btnp(1) or btnp(2) or btnp(3) or btnp(4)) then
 		p.first_move=true
+	end
+	if p.walking then
+		spawntrail(p.x+8,p.y+8,4,4,5,6)
 	end
 end
 
@@ -135,6 +141,7 @@ function move_player()
    	end
    end
   
+
   if (btn()>0) then
    p.x+=p.dx
    p.y+=p.dy

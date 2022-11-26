@@ -15,6 +15,7 @@ __lua__
 #include include/third_party.lua
 #include include/wall.lua
 #include include/water.lua	
+#include include/particles.lua
 __gfx__
 000000000000000000000000000000006ffffffffffffff66ffffffffffffd166ffffffffffffff661dddddddddddd1661dddddddddddd160000000000000000
 00000000000000000000000000000000f1fddddddddddf1ff1fdddddddddddd1f1fddddddddddf1f1dddddddddddddd11dddddddddddddd10000000000000000

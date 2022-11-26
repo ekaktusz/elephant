@@ -266,7 +266,7 @@ function doshake()
 			if tb.cur>0.9 then -- if the buffer is larger than 0.9:
 				tb.char+=1 -- set next character to be drawn.
 				tb.cur=0    -- reset the buffer.
-				if (ord(tb.str[tb.i],tb.char)!=32) sfx(tb.voice) -- play the voice sound effect.
+				--if (ord(tb.str[tb.i],tb.char)!=32) sfx(tb.voice) -- play the voice sound effect.
 			end
 			if (btnp(5)) tb.char=#tb.str[tb.i] -- advance to the last character, to speed up the message.
 		elseif btnp(5) then -- if already on the last message character and button ❎/x is pressed:
