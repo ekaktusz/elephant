@@ -21,6 +21,7 @@ function load_game_lvl(lvl)
 	devspeed=0
 	finished=false
 	reading=false
+	game_anim_speed=5
 	tb_init(0,{"the elephants are afraid of \nmice. this textbox could help \nthe player with the puzzles"})
 end
 
@@ -29,7 +30,6 @@ function init_game(lvl)
 	_draw = draw_game
 	current_lvl=lvl
 	load_game_lvl(current_lvl)
-	anim_timer3=1
 end
 
 function update_game()
@@ -40,13 +40,13 @@ function update_game()
 		end
 	end
 	if not loaded() then
-		anim_timer+=5
+		anim_timer+=game_anim_speed
 	end
 	if (btnp(4)) then
 		load_game_lvl(current_lvl)
 	end
 	if finished then
-		finish_anim_timer-=5
+		finish_anim_timer-=game_anim_speed
 		if (finish_anim_timer<0) then
 			next_level()
 		end

@@ -10,11 +10,12 @@ function init_menu()
 	make_lvl_slclts()
 	anim_timer2=92
 	anim_start=false
+	menu_anim_speed=5
 end
 
 function update_menu()
 	if (anim_start) then
-		anim_timer2-=5
+		anim_timer2-=menu_anim_speed
 	end
 
 	if btnp(5) then
