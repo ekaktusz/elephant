@@ -1,10 +1,13 @@
 --grid and button
 
-function make_gb()
-	grids=get_all_tile_pos('r') --racs
+function init_grids()
+	grids=get_all_tile_pos('r')
 	gcsprite=138
 	gosprite=170
-	b={
+end
+
+function init_button()
+	b = { 
 		tx=get_tx('g'), --gomb
 		ty=get_ty('g'),
 		pressed=false,
@@ -13,17 +16,21 @@ function make_gb()
 	}
 end
 
-function draw_gb()	
-	if(b.pressed) then
-		for _, g in ipairs(grids) do
-					spr(gosprite,(g.tx-1)*16,(g.ty-1)*16,2,2)
-		end
- 	spr(b.psprite,(b.tx-1)*16,(b.ty-1)*16,2,2)
+function draw_button()
+	if b.pressed then
+		spr(b.psprite,(b.tx-1)*16,(b.ty-1)*16,2,2)
 	else
-		for _, g in ipairs(grids) do
-					spr(gcsprite,(g.tx-1)*16,(g.ty-1)*16,2,2)
-		end
 		spr(b.usprite,(b.tx-1)*16,(b.ty-1)*16,2,2)
+	end
+end
+
+function draw_grids()
+	for _, g in ipairs(grids) do
+		if(b.pressed) then
+			spr(gosprite,(g.tx-1)*16,(g.ty-1)*16,2,2)
+		else
+			spr(gcsprite,(g.tx-1)*16,(g.ty-1)*16,2,2)
+		end
 	end
 end
 

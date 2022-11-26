@@ -1,8 +1,7 @@
 --game state
 function load_game_lvl(lvl)
 	anim_timer=0
-	anim_timer3=92
-	anim_start2=false
+	finish_anim_timer=92
 	tile_size=16
 	d_op={[0]=1,0,3,2}
 	make_gamemap(lvl)
@@ -13,17 +12,21 @@ function load_game_lvl(lvl)
 	make_door()
 	make_water()
 	make_bwall()
-	make_gb()
+	init_button()
+	init_grids()
 	make_mhc()
 	make_h()
 	shake=0
 	develop=0
 	devspeed=0
+	finished=false
+	reading=false
+	tb_init(0,{"the elephants are afraid of \nmice. this textbox could help \nthe player with the puzzles"})
 end
 
 function init_game(lvl)
 	_update = update_game
-	_draw = draw_game	
+	_draw = draw_game
 	current_lvl=lvl
 	load_game_lvl(current_lvl)
 	anim_timer3=1
@@ -36,15 +39,20 @@ function update_game()
 			update_elephant()
 		end
 	end
-	if first_a_finished() and not loaded() then
+	if not loaded() then
 		anim_timer+=5
-	end
-	if not first_a_finished() then
-		anim_timer3-=5
 	end
 	if (btnp(4)) then
 		load_game_lvl(current_lvl)
 	end
+	if finished then
+		finish_anim_timer-=5
+		if (finish_anim_timer<0) then
+			next_level()
+		end
+	end
+
+	if current_lvl==1 then tb_update() end
 end
 
 function draw_game()
@@ -55,39 +63,55 @@ function draw_game()
 	draw_wall()
 	draw_bwall()
 	draw_mhc()
+	draw_button()
+	draw_eaten_nuts()
+	draw_dwater()
 	draw_elephant()
 	draw_player()
-	draw_gb()
+	draw_grids()
 	draw_nuts()
 	draw_door()
 	draw_water()
 	draw_h()
-
-	if not first_a_finished() then
-		load_anim(anim_timer3)
-	end
+	if current_lvl==1 then tb_draw() end 
 		
-	if first_a_finished() and not loaded() then
+	if not loaded() then
 		load_anim(anim_timer)
+	end
+
+	if finished then
+		load_anim(finish_anim_timer)
 	end
 
 	doshake()
 end
 
-function load_anim(size)
+function load_anim(size,icx,icy)
+	cx=icx or 64
+	cy=icy or 64
 	for i=90,size,-1 do
-		circ(64,64,i,0)
-		circ(65,64,i,0)
+		circ(cx,cy,i,0)
+		circ(cx+1,cy,i,0)
 	end
 	
-	circ(64,64,size,7)
-	circ(65,64,size,7)
+	circ(cx,cy,size,7)
+	circ(cx+1,cy,size,7)
 end
 
 function loaded()
 	return anim_timer>=92
 end
 
-function first_a_finished()
-	return anim_timer3<0
+function switch_level(lvl)
+	load_game_lvl(lvl)
+end
+
+function next_level()
+	--itt kene lejatszani az uj animot
+	current_lvl+=1
+	if (current_lvl>n_lvls) then
+		init_menu()
+		return
+	end
+	switch_level(current_lvl)
 end

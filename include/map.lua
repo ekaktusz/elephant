@@ -1,7 +1,49 @@
 --map
-n_lvls=4 --number of levels
+n_lvls=8 --number of levels
+-- t = fal, b = torheto fal, c = csatornafedel, g = gomb, r = racs
+-- m = mogyi, e = elefant, a = ajto, h = egerlyuk, w = viz
 lvls={
 	{ --lvl1
+		{'t', 't', 't', 't', 'x', 'x', 't', 't'},
+		{'t', 'x', 'x', 'x', 'x', 'x', 'x', 't'},
+		{'x', 'w', 'x', 'x', 'x', 'x', 'x', 't'},
+		{'x', 'x', 'x', 't', 't', 'x', 'x', 't'},
+		{'t', 'x', 'x', 't', 't', 'x', 'x', 'a'},
+		{'t', 'e', 'x', 'x', 'x', 'x', 'x', 'a'},
+		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
+		{'t', 'x', 'x', 'x', 'p', 't', 't', 't'}
+	},
+	{ --lvl2
+		{'p', 'x', 'x', 't', 't', 't', 't', 't'},
+		{'t', 'e', 'x', 't', 't', 't', 't', 't'},
+		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
+		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
+		{'t', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
+		{'t', 'x', 'x', 'x', 'x', 'm', 'x', 'a'},
+		{'t', 't', 't', 't', 't', 't', 't', 't'},
+		{'t', 't', 't', 't', 't', 't', 't', 't'}
+	},
+	{ --lvl3
+		{'p', 'x', 'x', 'x', 'x', 'x', 't', 't'},
+		{'t', 't', 't', 't', 't', 'x', 't', 't'},
+		{'t', 't', 't', 'x', 'x', 'm', 't', 't'},
+		{'t', 't', 't', 'x', 't', 'x', 't', 't'},
+		{'t', 't', 't', 'e', 'x', 'x', 'x', 'a'},
+		{'t', 't', 't', 'x', 'x', 'x', 'x', 'a'},
+		{'t', 't', 't', 't', 't', 't', 't', 't'},
+		{'t', 't', 't', 't', 't', 't', 't', 't'}
+	},
+	{ --lvl4
+		{'t', 't', 'g', 'a', 'a', 't', 't', 't'},
+		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
+		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
+		{'t', 't', 'r', 'r', 'r', 't', 't', 't'},
+		{'t', 't', 'x', 'e', 'x', 't', 't', 't'},
+		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
+		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
+		{'t', 't', 'p', 'x', 'x', 't', 't', 't'}
+	},
+	{ --lvl5
 		{'t', 't', 't', 't', 't', 't', 't', 't'},
 		{'t', 't', 't', 'x', 'x', 'm', 't', 't'},
 		{'t', 't', 't', 't', 'x', 't', 't', 't'},
@@ -11,7 +53,7 @@ lvls={
 		{'t', 't', 't', 't', 't', 't', 't', 't'},
 		{'t', 't', 't', 't', 't', 't', 't', 't'}
 	},
-	{ --lvl2
+	{ --lvl6
 		{'p', 'x', 'x', 'x', 'x', 'x', 'x', 'm'},
 		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
 		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
@@ -21,7 +63,7 @@ lvls={
 		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
 		{'t', 't', 't', 'x', 'x', 'x', 'x', 'x'}
 	},
-	{ --testlvl3
+	{ --testlvl7
 		{'x', 'x', 'g', 'c', 'x', 'x', 'c', 'm'},
 		{'t', 't', 'h', 't', 't', 't', 'r', 'r'},
 		{'x', 'c', 'e', 'x', 'x', 'b', 'x', 'x'},
@@ -31,8 +73,8 @@ lvls={
 		{'x', 'x', 'p', 'm', 'x', 'h', 'x', 'x'},
 		{'x', 'x', 'x', 'x', 'x', 't', 'a', 'a'}
 	},
-	{ --testlvl4
-			{'a', 'a', 'x', 'g', 'x', 'x', 'x', 'x'},
+	{ --testlvl8
+		{'a', 'a', 'x', 'g', 'x', 'x', 'x', 'x'},
 		{'r', 'r', 'c', 'c', 'c', 'b', 'r', 'r'},
 		{'x', 'r', 'x', 'e', 'x', 'b', 'x', 'm'},
 		{'x', 'r', 'x', 'x', 'x', 'b', 'x', 'x'},
@@ -45,20 +87,6 @@ lvls={
 
 function make_gamemap()
 	gamemap=deepcopy(lvls[current_lvl])
-end
-
-function switch_level(lvl)
-	load_game_lvl(lvl)
-end
-
-function next_level()
-	--itt kene lejatszani az uj animot
-	current_lvl+=1
-	if (current_lvl>n_lvls) then
-		init_menu()
-		return
-	end
-	switch_level(current_lvl)
 end
 
 function get_all_tile_pos(obj)

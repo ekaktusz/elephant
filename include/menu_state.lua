@@ -1,9 +1,9 @@
 
 local text = "press ❎  to start"
 local f = 0
-local clvl=1
 
 function init_menu()
+	clvl=1
 	_update = update_menu
 	_draw = draw_menu
 	music(0)
@@ -38,18 +38,17 @@ end
 
 function menu_move(d)
 		--d: l vagy r
-		
 		if (d=='r') then
 			if clvl==n_lvls then return end
 			clvl+=1
 			for _, l in ipairs(lvl_slcts) do
-	    l.x-=20
+	    		l.x-=20
 			end
 		elseif (d=='l') then
 			if clvl==1 then return end
 			clvl-=1
 			for _, l in ipairs(lvl_slcts) do
-	    l.x+=20
+	    		l.x+=20
 			end
 		end
 end
@@ -63,8 +62,8 @@ function draw_menu()
 	rectfill(0,56,128,68,0)
 	rectfill(0,36,128,50,13)
 	rectfill(0,80,128,110,0)
-	obprint("elephant",18,20,7,0,3)
-	bprint("in the room",30,40,7,1.5)
+	obprint("elephant",19,20,7,0,3)
+	bprint("in the room",32,40,7,1.5)
 	--print("press ❎ to start",32,64,2)
 	draw_lvl_slct()
 	wavy_text("press ❎  to start",f)
@@ -75,7 +74,7 @@ function draw_menu()
 end
 
 clvlslct={
-	x=60,
+	x=55,
 	y=82
 }
 

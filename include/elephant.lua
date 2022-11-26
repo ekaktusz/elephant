@@ -151,7 +151,7 @@ function update_elephant()
 	if e.finish and (e.x>128
 		or e.x+32<0 or e.y>128 
 		or e.y+32<0) then
-		next_level()
+			finished=true
 	end
 end
 

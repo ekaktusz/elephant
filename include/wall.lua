@@ -20,12 +20,11 @@ end
 
 function draw_bwall()
 	for _, bw in ipairs(bwalls) do
-    spr(bwsprite,(bw.tx-1)*16,(bw.ty-1)*16,2,2)
+    	spr(bwsprite,(bw.tx-1)*16,(bw.ty-1)*16,2,2)
 	end
 	for _, bdw in ipairs(bdwalls) do
-    spr(bdwsprite,(bdw.tx-1)*16,(bdw.ty-1)*16,2,2)
+    	spr(bdwsprite,(bdw.tx-1)*16,(bdw.ty-1)*16,2,2)
 	end
-	print(#bwalls)
 end
 
 function ecollide_with_bwall()
@@ -36,8 +35,8 @@ function ecollide_with_bwall()
 		shake+=0.1
 		devspeed+=0.01
  	 	bdwalls[#bdwalls+1] = {tx=bw.tx, ty=bw.ty}
-	 		gamemap[bw.ty][bw.tx]='x'
-	 		del(bwalls,bw)
+		gamemap[bw.ty][bw.tx]='x'
+		del(bwalls,bw)
  		return
  	end
 	end

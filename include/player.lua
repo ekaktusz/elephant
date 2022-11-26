@@ -99,7 +99,8 @@ function move_player()
 	 	p.ty=p.y/tile_size+1
 	 	if (p.tx==9) then
 	 		--win
-	 		next_level()
+	 		--next_level()
+			finished=true
 	 		--p.tx=1
 	 		--p.x=(p.tx-1)*16
 	 	end
