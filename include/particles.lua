@@ -39,7 +39,7 @@ function drawparts()
     for i=1,#part do
         _p=part[i]
         if _p.tpe==0 then
-            pset(_p.x,_p.y,6)
+            pset(_p.x,_p.y,_p.col)
         end
     end
 end

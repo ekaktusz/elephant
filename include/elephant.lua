@@ -19,7 +19,8 @@ function make_elephant()
 		hit_freeze_time=40, -- meddig eszik egy mogyit
 		hit_freeze_timer=0,
 		should_move=false,
-		seen_player=false
+		seen_player=false,
+		anim_speed=10
 	}
 	e.x=(e.tx-1)*16
 	e.y=(e.ty-1)*16
@@ -30,10 +31,18 @@ end
 function draw_elephant()
 	if not e.hit_freeze then
 		e.stp+=1
-		if(e.stp%10==0) then e.f+=1 end
+		if(e.stp%e.anim_speed==0) then e.f+=1 end
 		if(e.f>1) then e.f=0 end
 	end
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.d==2,false)
+	--szem
+	if (e.f==0 ) then
+		rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
+		rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
+	else 
+		rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
+		rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
+	end
 end
 
 function update_elephant_d()
@@ -158,6 +167,8 @@ function update_elephant()
 end
 
 function move_elephant()
+
+	e.anim_speed=10
 	if (e.seen_player) then
 		if (e.d==1 and not ecan_move('r')) or
 		   (e.d==2 and not ecan_move('l')) or
@@ -189,18 +200,22 @@ function move_elephant()
 		then --jobbra
 		spawntrail(e.x,e.y+32,2,2,5,6)
 		e.x+=e.spd
+		e.anim_speed=5
 	elseif (e.d==2) and ecan_move('l') and (e.should_move or e.seen_player)
 		then --balra
 			spawntrail(e.x+32,e.y+32,2,2,5,6)
 		e.x-=e.spd
+		e.anim_speed=5
 	elseif (e.d==3) and ecan_move('u') and (e.should_move or e.seen_player)
 		then --fel
 			spawntrail(e.x+16,e.y+32,8,8,5,6)
 		e.y-=e.spd
+		e.anim_speed=5
 	elseif (e.d==4) and ecan_move('d') and (e.should_move or e.seen_player)
 		then --le
 			spawntrail(e.x+16,e.y,8,8,5,6)
 		e.y+=e.spd
+		e.anim_speed=5
 	end
 end
 
