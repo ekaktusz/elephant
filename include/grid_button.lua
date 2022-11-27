@@ -35,7 +35,17 @@ function draw_grids()
 end
 
 function press_button()
-	if p.tx==b.tx and p.ty==b.ty then
+	if p.tx==b.tx and p.ty==b.ty and not e_undergrid() then
 		b.pressed= not b.pressed
 	end
+end
+
+function e_undergrid()
+	for _, g in ipairs(grids) do
+		if (g.tx>=e.tx and g.tx<=e.tx+1) and (g.ty>=e.ty and g.ty<=e.ty+1)
+			 or (g.tx>=e.ntx and g.tx<=e.ntx+1) and (g.ty>=e.nty and g.ty<=e.nty+1) then
+			return true
+		end
+	end
+	return false
 end
