@@ -209,8 +209,8 @@ function is_tile_on_side(tx,ty,letter,side)
 		end
 		if (side=='l' or side=='r') then
 			if side=='l' then stx=tx-2 end
-			if (ty==e.ty) or (ty-1==e.ty) then -- egy sorban vagy eggyel alatta
-				if (stx==e.tx) then
+			if (ty==e.ty) or (ty-1==e.ty) or (ty==e.nty) or (ty-1==e.nty) then -- egy sorban vagy eggyel alatta
+				if (stx==e.tx) or (stx==e.ntx) then
 					return true
 				end
 			end
@@ -219,8 +219,8 @@ function is_tile_on_side(tx,ty,letter,side)
 		-- u vagy d
 		if (side=='u' or side=='d') then
 			if side=='u' then sty=ty-2 end
-			if (tx==e.tx or tx-1==e.tx) then -- egy oszlopban vagy eggyel elotte
-				if (sty==e.ty) then
+			if (tx==e.tx or tx-1==e.tx) or (tx==e.ntx) or (tx-1==e.ntx) then -- egy oszlopban vagy eggyel elotte
+				if (sty==e.ty) or (sty==e.nty) then
 					return true
 				end
 			end

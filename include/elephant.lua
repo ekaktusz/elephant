@@ -61,7 +61,6 @@ function update_elephant_d()
 		end
 	end
 
-	
 	if (not e.seen_player) then
 		-- is in line with nut
 		for _, n in ipairs(nuts) do
@@ -102,13 +101,11 @@ function update_elephant_d()
 		if (can_see_through_x(p.tx,e.tx,p.ty)) then
 			if (e.tx>p.tx) then
 				--elefant mogott
-				--e.should_move=true
 				e.seen_player=true
 				e.d=1
 			end
 			if (e.tx<p.tx) then
 				--elefant elott
-				--e.should_move=true
 				e.seen_player=true
 				e.d=2
 			end
@@ -118,13 +115,11 @@ function update_elephant_d()
 		if (can_see_through_y(p.ty,e.ty,p.tx)) then
 			if (e.ty>p.ty) then
 				--elefant felett
-				--e.should_move=true
 				e.seen_player=true
 				e.d=4
 			end
 			if (e.ty<p.ty) then
 				--elefant alatt
-				--e.should_move=true
 				e.seen_player=true
 				e.d=3
 			end
@@ -150,9 +145,21 @@ function update_elephant()
 		if (e.x%tile_size==0 and e.y%tile_size==0) then
 			e.tx=e.x/16+1
 			e.ty=e.y/16+1
+			e.ntx=e.tx
+			e.nty=e.ty
 			e.should_move=false
 			--e.d=0
 			update_elephant_d()
+		else
+			if (e.x>(e.tx-1)*16) then --jobbra megy és mid tile
+				e.ntx=e.tx+1
+			elseif (e.x<(e.tx-1)*16) then --balra megy és mid tile
+				e.ntx=e.tx-1
+			elseif (e.y>(e.ty-1)*16) then --lefele megy és mid tile
+				e.nty=e.ty-1
+			elseif (e.y<(e.ty-1)*16) then --lefele megy és mid tile
+				e.nty=e.ty+1
+			end
 		end
 	end
 	
