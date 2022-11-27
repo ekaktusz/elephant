@@ -35,13 +35,30 @@ function draw_elephant()
 		if(e.f>1) then e.f=0 end
 	end
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.d==2,false)
-	--szem
-	--if (e.f==0 ) then
-	--	rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
-	--	rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
-	--else 
-	--	rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
-	--	rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
+	-- szem
+	--if e.seen_player then
+	--	if (e.d==1) then
+	--		if (e.f==0 ) then
+	--			rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
+	--			rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
+	--		else 
+	--			rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
+	--			rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
+	--		end
+	--	elseif (e.d==2) then
+	--		if (e.f==0 ) then
+	--			rectfill(e.x+4,e.y+8,e.x+7,e.y+11,7) --szemfeherje
+	--			rectfill(e.x+4,e.y+10,e.x+5,e.y+11,1) --pupilla
+	--			
+	--		else 
+	--			rectfill(e.x+4,e.y+9,e.x+7,e.y+12,7) --szemfeherje
+	--			rectfill(e.x+4,e.y+11,e.x+5,e.y+12,1) --pupilla
+	--	end
+	--	elseif (e.d==3) then
+--
+	--	elseif (e.d==4) then
+--
+	--	end	
 	--end
 end
 
@@ -156,9 +173,9 @@ function update_elephant()
 			elseif (e.x<(e.tx-1)*16) then --balra megy és mid tile
 				e.ntx=e.tx-1
 			elseif (e.y>(e.ty-1)*16) then --lefele megy és mid tile
-				e.nty=e.ty-1
-			elseif (e.y<(e.ty-1)*16) then --lefele megy és mid tile
 				e.nty=e.ty+1
+			elseif (e.y<(e.ty-1)*16) then --felfele megy és mid tile
+				e.nty=e.ty-1
 			end
 		end
 	end
