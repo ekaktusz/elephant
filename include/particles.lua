@@ -28,6 +28,19 @@ function spawnpukk(_x,_y,_sx,_sy,_col,_oldcol)
     end
 end
 
+function spawnbrr(_x,_y,_sx,_sy,_col,_oldcol)
+    for i=1,5,1 do
+        local _ox = sin(_ang)*_sx
+        local _oy = cos(_ang)*_sy
+        local _dx = rnd(2.5)-1.25
+        local _dy = -rnd(2)
+        local _g = 0.2
+        local _mage = 15+rnd(5)
+    
+        addpart(_x+_ox,_y+_oy,_dx,_dy,_g,0,_mage,_col,_oldcol)
+    end
+end
+
 
 function spawntrail(_x,_y,_sx,_sy,_col,_oldcol)
     for i=1,2,1 do

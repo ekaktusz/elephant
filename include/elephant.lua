@@ -14,18 +14,23 @@ function make_elephant()
 		stp=0,
 		spd=1,
 		d=0,
+		wall_break_time=0,
+		wtx=0,
+		wty=0,
 		finish=false,
 		hit_freeze=false,
 		hit_freeze_time=40, -- meddig eszik egy mogyit
 		hit_freeze_timer=0,
 		should_move=false,
 		seen_player=false,
-		anim_speed=10
+		anim_speed=10,
+		eyes_closed=false
 	}
 	e.x=(e.tx-1)*16
 	e.y=(e.ty-1)*16
 	e.ntx=e.tx
 	e.nty=e.ty
+	frame_counter=0
 end
 
 function draw_elephant()
@@ -35,7 +40,7 @@ function draw_elephant()
 		if(e.f>1) then e.f=0 end
 	end
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.d==2,false)
-	-- szem
+	 --szem
 	--if e.seen_player then
 	--	if (e.d==1) then
 	--		if (e.f==0 ) then
@@ -60,15 +65,53 @@ function draw_elephant()
 --
 	--	end	
 	--end
+	
+	--if (e.d==1 or e.d==3 or e.d==4 or e.d==0) then
+	--	if (e.f==0 ) then
+	--		rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
+	--		rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
+	--		if(e.eyes_closed) then
+	--			rectfill(e.x+24,e.y+8,e.x+27,e.y+11,6)
+	--		end
+	--	else 
+	--		rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
+	--		rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
+	--		if(e.eyes_closed) then
+	--			rectfill(e.x+24,e.y+9,e.x+27,e.y+12,6)
+	--		end
+	--	end
+	--elseif (e.d==2) then
+	--	if (e.f==0 ) then
+	--		rectfill(e.x+4,e.y+8,e.x+7,e.y+11,7) --szemfeherje
+	--		rectfill(e.x+4,e.y+10,e.x+5,e.y+11,1) --pupilla
+	--		if(e.eyes_closed) then
+	--			rectfill(e.x+4,e.y+8,e.x+7,e.y+11,6)
+	--		end
+	--	else 
+	--		rectfill(e.x+4,e.y+9,e.x+7,e.y+12,7) --szemfeherje
+	--		rectfill(e.x+4,e.y+11,e.x+5,e.y+12,1) --pupilla
+	--		if(e.eyes_closed) then
+	--			rectfill(e.x+4,e.y+9,e.x+7,e.y+12,6)
+	--		end
+	--	end
+	--end
+	print(e.wall_break_time,0)
 end
 
 function update_elephant_d()
+	frame_counter+=1
+	if (frame_counter%100<=20) then
+		e.eyes_closed=true
+	else
+		e.eyes_closed=false
+	end
 	ecollide_with_nut()
 	ecollide_with_water()
 	ecollide_with_bwall()
 	
 	if e.hit_freeze then
 		--wait 10 frame
+		spawnpukk(e.x+24,e.y+24,0,0,4,9)
 		if e.hit_freeze_timer<e.hit_freeze_time then
 			e.hit_freeze_timer+=1
 			return
@@ -76,6 +119,11 @@ function update_elephant_d()
 			e.hit_freeze=false
 			e.hit_freeze_timer=0
 		end
+	end
+
+	if e.wall_break_time>0 then
+		spawnbrr((e.wtx-1)*16+8,(e.wty-1)*16-8,16,16,4,5)
+		e.wall_break_time-=1
 	end
 
 	if (not e.seen_player) then

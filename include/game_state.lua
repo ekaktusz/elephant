@@ -60,7 +60,9 @@ end
 function draw_game()
 	cls()
 	map(0,0)
-	drawparts()
+	if not e.hit_freeze then
+		drawparts()
+	end
 	--spr(140,112,32,2,2) -- mogyoro
 	--spr(64,16,16,4,4)   -- elefant
 	draw_wall()
@@ -70,6 +72,9 @@ function draw_game()
 	draw_eaten_nuts()
 	draw_dwater()
 	draw_elephant()
+	if e.hit_freeze or e.wall_break_time>0 then
+		drawparts()
+	end
 	draw_player()
 	draw_grids()
 	draw_nuts()

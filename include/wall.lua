@@ -34,6 +34,9 @@ function ecollide_with_bwall()
  	 then
 		shake+=0.1
 		devspeed+=0.01
+		e.wall_break_time=20
+		e.wtx=bw.tx
+		e.wty=bw.ty
  	 	bdwalls[#bdwalls+1] = {tx=bw.tx, ty=bw.ty}
 		gamemap[bw.ty][bw.tx]='x'
 		del(bwalls,bw)
