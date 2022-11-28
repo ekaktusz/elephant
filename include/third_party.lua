@@ -141,9 +141,9 @@ function rspr(s,x,y,a,w,h)
    yy=flr(dx*sa+dy*ca+y0)
    if (xx>=0 and xx<sw and yy>=0 and yy<=sh-1) then
     local col = sget(sx+xx,sy+yy)
-				if col != 0 then
-				   pset(x+ix,y+iy,col)
-				end
+		if col != 0 then
+			pset(x+ix,y+iy,col)
+		end
    end
   end
  end
