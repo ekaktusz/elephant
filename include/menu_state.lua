@@ -97,7 +97,7 @@ function draw_menu()
 	if mission_selected then
 		if (f%50<=25) then
 			--circfill(64,clvlslct.y+8,10,0)
-			rectfill(clvlslct.x,clvlslct.y,clvlslct.x+20,clvlslct.y+26,0)
+			rectfill(clvlslct.x-1,clvlslct.y,clvlslct.x+20,clvlslct.y+26,0)
 		end
 	end
 	
@@ -111,7 +111,7 @@ function draw_menu()
 end
 
 clvlslct={
-	x=55,
+	x=56,
 	y=82
 }
 
@@ -151,5 +151,5 @@ function draw_lvl_slct()
 	
 	--spr(140,clvlslct.x,clvlslct.y,2,2)
 	--rspr(102,clvlslct.x,clvlslct.y,a,2,2)
-	print("room"..clvl,clvlslct.x,clvlslct.y+20,9)
+	print("room"..clvl,clvlslct.x-1,clvlslct.y+20,9)
 end

@@ -99,7 +99,7 @@ function draw_elephant()
 	--		end
 	--	end
 	--end
-	print(e.wall_break_time,0)
+	print(e.last_horizontal_dir,0)
 end
 
 function update_elephant_d()
@@ -115,7 +115,7 @@ function update_elephant_d()
 	
 	if e.hit_freeze then
 		--wait 10 frame
-		if (last_horizontal_dir=='r') then
+		if (e.last_horizontal_dir=='r') then
 			spawnpukk(e.x+24,e.y+24,0,0,e.current_c.col1,e.current_c.col2)
 		else
 			spawnpukk(e.x+8,e.y+24,0,0,e.current_c.col1,e.current_c.col2)
@@ -132,6 +132,10 @@ function update_elephant_d()
 	if e.wall_break_time>0 then
 		spawnbrr((e.wtx-1)*16+8,(e.wty-1)*16-8,16,16,4,5)
 		e.wall_break_time-=1
+	end
+
+	if (e.hit_freeze) then
+		return
 	end
 
 	if (not e.seen_player) then
