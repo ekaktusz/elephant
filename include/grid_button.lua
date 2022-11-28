@@ -35,7 +35,7 @@ function draw_grids()
 end
 
 function press_button()
-	if p.tx==b.tx and p.ty==b.ty and not e_undergrid() then
+	if is_on_tile(p.tx,p.ty,'g') and not e_undergrid() then
 		b.pressed= not b.pressed
 	end
 end

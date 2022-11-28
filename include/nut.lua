@@ -44,17 +44,8 @@ function ecollide_with_nut()
 end
 
 function place_nut()
-	if (p.has_nut) and not is_nut_on_tile(p.tx,p.ty) then
-	 nuts[#nuts+1] = {tx=p.tx, ty=p.ty}
+	if (p.has_nut) and not is_on_tile(p.tx,p.ty,'m') and not is_on_tile(p.tx,p.ty,'r') and not is_on_tile(p.tx,p.ty,'h')  and not is_on_tile(p.tx,p.ty,'g') then
+		nuts[#nuts+1] = {tx=p.tx, ty=p.ty}
 		p.has_nut=false
 	end
-end
-
-function is_nut_on_tile(tx,ty)
-	for _, n in ipairs(nuts) do
-	 	if n.tx==tx and n.ty==ty then
-	 		return true
-	 	end
-	end
-	return false
 end

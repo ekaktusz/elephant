@@ -157,6 +157,39 @@ function is_end_of_map(tx,ty,d)
 	if (d=='u') then return ty==1 end
 end
 
+function is_on_tile(tx,ty,letter)
+	--nut
+	if letter=='m' then
+		for _, n in ipairs(nuts) do
+			if n.tx==tx and n.ty==ty then
+				return true
+			end
+	   end
+	   return false
+	end
+	--button
+	if letter=='g' then
+		if b.tx==tx and b.ty==ty then
+			return true
+		end
+		return false
+	end
+	--grid
+	if (letter=='r') then
+		for _, g in ipairs(grids) do
+			if (g.tx==tx and g.ty==ty) then
+				return true
+			end
+		end
+		return false
+	end
+	
+	--hole
+	if (letter=='h') then
+		return gamemap[ty][tx]==letter
+	end
+end
+
 function is_tile_on_side(tx,ty,letter,side)
 	--letter: t for wall, w for water, m for nut, p for player, e for elephant, x for nothing, a for door
 	
