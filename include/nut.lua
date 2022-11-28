@@ -38,6 +38,7 @@ function ecollide_with_nut()
 		del(nuts,n)
 		e.d=0
 		e.hit_freeze=true
+		e.current_c=e.nut_eat_c
  		return
  	end
 	end

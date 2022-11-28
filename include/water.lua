@@ -32,6 +32,7 @@ function ecollide_with_water()
 		dwater[#dwater+1] = {tx=w.tx, ty=w.ty}
  		del(water,w)
  		e.d=0
+		e.current_c=e.w_drink_c
  		e.hit_freeze=true
  		return
  	end

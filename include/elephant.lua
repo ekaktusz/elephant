@@ -14,6 +14,9 @@ function make_elephant()
 		stp=0,
 		spd=1,
 		d=0,
+		nut_eat_c={col1=4,col2=9},
+		w_drink_c={col1=12,col2=1},
+		current_c={col1=4,col2=9},
 		wall_break_time=0,
 		wtx=0,
 		wty=0,
@@ -24,7 +27,8 @@ function make_elephant()
 		should_move=false,
 		seen_player=false,
 		anim_speed=10,
-		eyes_closed=false
+		eyes_closed=false,
+		last_horizontal_dir='r'
 	}
 	e.x=(e.tx-1)*16
 	e.y=(e.ty-1)*16
@@ -39,7 +43,7 @@ function draw_elephant()
 		if(e.stp%e.anim_speed==0) then e.f+=1 end
 		if(e.f>1) then e.f=0 end
 	end
-	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.d==2,false)
+	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.last_horizontal_dir=='l',false)
 	 --szem
 	--if e.seen_player then
 	--	if (e.d==1) then
@@ -111,7 +115,11 @@ function update_elephant_d()
 	
 	if e.hit_freeze then
 		--wait 10 frame
-		spawnpukk(e.x+24,e.y+24,0,0,4,9)
+		if (last_horizontal_dir=='r') then
+			spawnpukk(e.x+24,e.y+24,0,0,e.current_c.col1,e.current_c.col2)
+		else
+			spawnpukk(e.x+8,e.y+24,0,0,e.current_c.col1,e.current_c.col2)
+		end
 		if e.hit_freeze_timer<e.hit_freeze_time then
 			e.hit_freeze_timer+=1
 			return
@@ -135,12 +143,14 @@ function update_elephant_d()
 						--elefant mogott
 						e.should_move=true
 						e.d=2
+						e.last_horizontal_dir='l'
 					end
 					if (e.tx<n.tx) then
 						--elefant elott
 						e.ntx=e.tx-1
 						e.should_move=true
 						e.d=1
+						e.last_horizontal_dir='r'
 					end
 				end
 			end
@@ -168,11 +178,13 @@ function update_elephant_d()
 				--elefant mogott
 				e.seen_player=true
 				e.d=1
+				e.last_horizontal_dir='r'
 			end
 			if (e.tx<p.tx) then
 				--elefant elott
 				e.seen_player=true
 				e.d=2
+				e.last_horizontal_dir='l'
 			end
 		end
 	end
