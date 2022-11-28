@@ -65,8 +65,9 @@ function update_player()
 		p.first_move=true
 	end
 	if p.walking then
-		spawntrail(p.x+8,p.y+8,4,4,5,6)
+		spawntrail(p.x+8,p.y+8,4,4,5,6,ppart)
 	end
+	updateparts(ppart)
 end
 
 function pcan_move(d)

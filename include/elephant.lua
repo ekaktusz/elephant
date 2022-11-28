@@ -99,7 +99,6 @@ function draw_elephant()
 	--		end
 	--	end
 	--end
-	print(e.last_horizontal_dir,0)
 end
 
 function update_elephant_d()
@@ -116,9 +115,9 @@ function update_elephant_d()
 	if e.hit_freeze then
 		--wait 10 frame
 		if (e.last_horizontal_dir=='r') then
-			spawnpukk(e.x+24,e.y+24,0,0,e.current_c.col1,e.current_c.col2)
+			spawnpukk(e.x+24,e.y+24,0,0,e.current_c.col1,e.current_c.col2,part)
 		else
-			spawnpukk(e.x+8,e.y+24,0,0,e.current_c.col1,e.current_c.col2)
+			spawnpukk(e.x+8,e.y+24,0,0,e.current_c.col1,e.current_c.col2,part)
 		end
 		if e.hit_freeze_timer<e.hit_freeze_time then
 			e.hit_freeze_timer+=1
@@ -130,7 +129,7 @@ function update_elephant_d()
 	end
 
 	if e.wall_break_time>0 then
-		spawnbrr((e.wtx-1)*16+8,(e.wty-1)*16-8,16,16,4,5)
+		spawnbrr((e.wtx-1)*16+8,(e.wty-1)*16-8,16,16,4,5,part)
 		e.wall_break_time-=1
 	end
 
@@ -250,7 +249,7 @@ function update_elephant()
 		or e.y+32<0) then
 			finished=true
 	end
-
+	updateparts(epart)
 	
 end
 
@@ -269,16 +268,16 @@ function move_elephant()
 	
 	if (e.finish) then
 		if (e.d==1) then
-			spawntrail(e.x,e.y+32,2,2,5,6)
+			spawntrail(e.x,e.y+32,2,2,5,6,epart)
 			e.x+=e.spd
 		elseif (e.d==2) then
-			spawntrail(e.x+32,e.y+32,2,2,5,6)
+			spawntrail(e.x+32,e.y+32,2,2,5,6,epart)
 			e.x-=e.spd
 		elseif (e.d==3) then
-			spawntrail(e.x+16,e.y+32,8,8,5,6)
+			spawntrail(e.x+16,e.y+32,8,8,5,6,epart)
 			e.y-=e.spd
 		elseif (e.d==4) then
-			spawntrail(e.x+16,e.y,8,8,5,6)
+			spawntrail(e.x+16,e.y,8,8,5,6,epart)
 			e.y+=e.spd
 		end
 		return
@@ -286,22 +285,22 @@ function move_elephant()
 
 	if (e.d==1) and ecan_move('r') and (e.should_move or e.seen_player)
 		then --jobbra
-		spawntrail(e.x,e.y+32,2,2,5,6)
+		spawntrail(e.x,e.y+32,2,2,5,6,epart)
 		e.x+=e.spd
 		e.anim_speed=5
 	elseif (e.d==2) and ecan_move('l') and (e.should_move or e.seen_player)
 		then --balra
-			spawntrail(e.x+32,e.y+32,2,2,5,6)
+			spawntrail(e.x+32,e.y+32,2,2,5,6,epart)
 		e.x-=e.spd
 		e.anim_speed=5
 	elseif (e.d==3) and ecan_move('u') and (e.should_move or e.seen_player)
 		then --fel
-			spawntrail(e.x+16,e.y+32,8,8,5,6)
+			spawntrail(e.x+16,e.y+32,8,8,5,6,epart)
 		e.y-=e.spd
 		e.anim_speed=5
 	elseif (e.d==4) and ecan_move('d') and (e.should_move or e.seen_player)
 		then --le
-			spawntrail(e.x+16,e.y,8,8,5,6)
+			spawntrail(e.x+16,e.y,8,8,5,6,epart)
 		e.y+=e.spd
 		e.anim_speed=5
 	end

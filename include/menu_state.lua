@@ -21,7 +21,7 @@ function update_menu()
 	end
 	if not mission_selected then
 		if btnp(5) then
-			music(-1,700)
+			--music(-1,700)
 			mission_selected=true
 			--anim_start=true
 		end
@@ -43,16 +43,16 @@ function update_menu()
 	for _, l in ipairs(lvl_slcts) do
 		if(l.nx>l.x) then
 			--spawntrail(clvlslct.x+8,clvlslct.y+12,4,4,4,9)
-			spawnpukk(clvlslct.x+8,clvlslct.y+8,0,0,4,9)
+			spawnpukk(clvlslct.x+8,clvlslct.y+8,0,0,4,9,part)
 			l.x+=5
 		elseif (l.nx<l.x) then
-			spawnpukk(clvlslct.x+8,clvlslct.y+8,0,0,4,9)
+			spawnpukk(clvlslct.x+8,clvlslct.y+8,0,0,4,9,part)
 			l.x-=5
 		end
 	end
 
 
-	updateparts()
+	updateparts(part)
 
 	if mission_selected and not anim_start then
 		select_timer-=1
@@ -83,16 +83,18 @@ function draw_menu()
 	cls()
 	pal()
 	
-	map(0)
-	rectfill(0,16,128,36,13)
+	draw_map()
+	rectfill(0,16,128,36,4)
 	rectfill(0,56,128,68,0)
-	rectfill(0,36,128,50,13)
+	rectfill(0,36,128,50,4)
 	rectfill(0,80,128,110,0)
 	obprint("elephant",19,20,7,0,3)
-	bprint("in the room",32,40,7,1.5)
+	bprint("in the room",32,40,9,1.5)
 	--print("press ❎ to start",32,64,2)
 	draw_lvl_slct()
 	wavy_text("press ❎  to start",f)
+
+	draw_map_edge()
 
 	if mission_selected then
 		if (f%50<=25) then
@@ -105,8 +107,7 @@ function draw_menu()
  		load_anim(anim_timer2)
 	end
 
-	drawparts()
-
+	drawparts(part)
 	
 end
 

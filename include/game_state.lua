@@ -54,15 +54,13 @@ function update_game()
 
 	if current_lvl==1 then tb_update() end
 	
-	updateparts()
+	updateparts(part)
 end
 
 function draw_game()
 	cls()
-	map(0,0)
-	if not e.hit_freeze then
-		drawparts()
-	end
+	--map(0,0)
+	draw_map()
 	--spr(140,112,32,2,2) -- mogyoro
 	--spr(64,16,16,4,4)   -- elefant
 	draw_wall()
@@ -71,17 +69,17 @@ function draw_game()
 	draw_button()
 	draw_eaten_nuts()
 	draw_dwater()
-	draw_elephant()
-	if e.hit_freeze or e.wall_break_time>0 then
-		drawparts()
-	end
+	drawparts(ppart)
 	draw_player()
 	draw_grids()
+	drawparts(epart)
+	draw_elephant()
 	draw_nuts()
-	draw_door()
 	draw_water()
 	draw_h()
-	
+	draw_map_edge()
+	draw_door()
+	drawparts(part)
 	if current_lvl==1 then tb_draw() end 
 		
 	if not loaded() then

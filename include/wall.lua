@@ -6,7 +6,7 @@ end
 
 function draw_wall()
 	for _, w in ipairs(walls) do
-    spr(wsprite,(w.tx-1)*16,(w.ty-1)*16,2,2)
+		spr(wsprite,(w.tx-1)*16,(w.ty-1)*16,2,2)
 	end
 end
 

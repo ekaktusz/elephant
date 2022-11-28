@@ -1,89 +1,63 @@
---map
-n_lvls=8 --number of levels
--- t = fal, b = torheto fal, c = csatornafedel, g = gomb, r = racs
--- m = mogyi, e = elefant, a = ajto, h = egerlyuk, w = viz
-lvls={
-	{ --lvl1
-		{'t', 't', 't', 't', 'x', 'x', 't', 't'},
-		{'t', 'x', 'x', 'x', 'x', 'x', 'x', 't'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 't'},
-		{'x', 'x', 'x', 't', 't', 'x', 'x', 't'},
-		{'t', 'x', 'x', 't', 't', 'x', 'x', 'a'},
-		{'t', 'e', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'x', 'x', 'x', 'p', 't', 't', 't'}
-	},
-	{ --lvl2
-		{'p', 'x', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'e', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'t', 'x', 'x', 'x', 'x', 'm', 'x', 'a'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'}
-	},
-	{ --lvl3
-		{'p', 'x', 'x', 'x', 'x', 'x', 't', 't'},
-		{'t', 't', 't', 't', 't', 'x', 't', 't'},
-		{'t', 't', 't', 'x', 'x', 'm', 't', 't'},
-		{'t', 't', 't', 'x', 't', 'x', 't', 't'},
-		{'t', 't', 't', 'e', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 'x', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'}
-	},
-	{ --lvl4
-		{'t', 't', 'g', 'a', 'a', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'r', 'r', 'r', 't', 't', 't'},
-		{'t', 't', 'x', 'e', 'x', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'p', 'x', 'x', 't', 't', 't'}
-	},
-	{ --lvl5
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 'x', 'x', 'm', 't', 't'},
-		{'t', 't', 't', 't', 'x', 't', 't', 't'},
-		{'e', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'x', 'x', 'x', 'p', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'}
-	},
-	{ --lvl6
-		{'p', 'x', 'x', 'x', 'x', 'x', 'x', 'm'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
-		{'t', 't', 't', 'x', 'x', 'x', 'x', 'x'},
-		{'e', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 'x', 'x', 'x', 'x', 'x'}
-	},
-	{ --testlvl7
-		{'x', 'x', 'g', 'c', 'x', 'x', 'c', 'm'},
-		{'t', 't', 'h', 't', 't', 't', 'r', 'r'},
-		{'x', 'c', 'e', 'x', 'x', 'b', 'x', 'x'},
-		{'x', 'c', 'x', 'x', 'x', 'b', 'x', 'x'},
-		{'x', 't', 'x', 'x', 'x', 't', 'r', 'r'},
-		{'x', 't', 'x', 'x', 'x', 't', 'x', 'x'},
-		{'x', 'x', 'p', 'm', 'x', 'h', 'x', 'x'},
-		{'x', 'x', 'x', 'x', 'x', 't', 'a', 'a'}
-	},
-	{ --testlvl8
-		{'a', 'a', 'x', 'g', 'x', 'x', 'x', 'x'},
-		{'r', 'r', 'c', 'c', 'c', 'b', 'r', 'r'},
-		{'x', 'r', 'x', 'e', 'x', 'b', 'x', 'm'},
-		{'x', 'r', 'x', 'x', 'x', 'b', 'x', 'x'},
-		{'r', 'r', 'b', 'x', 'x', 't', 'r', 'r'},
-		{'x', 'x', 'b', 'x', 'x', 't', 'c', 'c'},
-		{'x', 'x', 'b', 'm', 'x', 'x', 'x', 'x'},
-		{'m', 'x', 'h', 'p', 'x', 'x', 'x', 'x'}
-	}
-}
+function draw_tile(tx,ty)
+	local _x1=(tx-1)*16
+	local _y1=(ty-1)*16
+	local _x2=tx*16
+	local _y2=ty*16
+	rectfill(_x1  ,_y1  ,_x2  ,_y2,6) --  4 sarok
+	rectfill(_x1  ,_y1+1,_x2  ,_y2-1,15) -- háttér
+	rectfill(_x1+1,_y1  ,_x2-1,_y2,15) -- háttér
+	rectfill(_x1+1,_y1+1,_x2-1,_y2-1,1) -- 4 sötétkék pötty
+	rectfill(_x1+2,_y1+1,_x2-2,_y2-1,15)  --8 háttérszínű geci megint
+	rectfill(_x1+1,_y1+2,_x2-1,_y2-2,15) --8 háttérszínű geci megint
+	rectfill(_x1+1,_y1+3,_x2-1,_y2-3,13) --lila outline
+	rectfill(_x1+2,_y1+2,_x2-2,_y2-2,13)
+	rectfill(_x1+3,_y1+1,_x2-3,_y2-1,13)
+
+	rectfill(_x1+2,_y1+4,_x2-2,_y2-4,15) --belső háttér
+	rectfill(_x1+3,_y1+3,_x2-3,_y2-3,15)
+	rectfill(_x1+4,_y1+2,_x2-4,_y2-2,15)
+
+	--if (tx==1) then
+	--	rectfill(_x1,_y1,_x1+1,_y2,4)
+	--elseif (tx==8) then 
+	--	rectfill(_x2-2,_y1,_x2,_y2,4)
+	--end
+	--if (ty==1) then
+	--	rectfill(_x1,_y1,_x2,_y1+1,4)
+	--elseif (ty==8) then
+	--	rectfill(_x1,_y2-2,_x2,_y2,4)
+	--end
+	
+
+	--if (tx==8) then--jobboldal
+	--	rectfill(_x2-2,_y1,_x2,_y2,13)
+	--	rectfill(_x1+2,_y1+4,_x2-2,_y2-4,15)
+	--	pset(_x2,_y1,6)
+	--	pset(_x2,_y2,6)
+	--	pset(_x2,_y1+1,1)
+	--	pset(_x2,_y2-1,1)
+	--	pset(_x2-1,_y1,1)
+	--	pset(_x2-1,_y2,1)
+	
+	
+	--end
+end
+
+function draw_map_edge()
+	local _col=4
+	rectfill(0,0,128,1,_col)--fent
+	rectfill(0,126,128,128,_col)--lent
+	rectfill(0,0,1,128,_col)--bal
+	rectfill(126,0,128,128,_col)--jobb
+end
+
+function draw_map()
+	for i=1,8,1 do
+		for j=1,8,1 do
+			draw_tile(i,j)
+		end
+	end
+end
 
 function make_gamemap()
 	gamemap=deepcopy(lvls[current_lvl])
