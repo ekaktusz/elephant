@@ -147,10 +147,6 @@ function draw_colored_tile(tx,ty,_col1,_col2,_col3,_col4)
 	local _y1=(ty-1)*16
 	local _x2=tx*16
 	local _y2=ty*16
-    ---local _col1=6
-    ---local _col2=13
-    ---local _col3=15
-    ---local _col4=1
 	rectfill(_x1  ,_y1  ,_x2  ,_y2,_col1) --  4 sarok
 	rectfill(_x1  ,_y1+1,_x2  ,_y2-1,_col3) -- háttér
 	rectfill(_x1+1,_y1  ,_x2-1,_y2,_col3) -- háttér

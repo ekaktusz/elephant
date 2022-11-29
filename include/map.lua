@@ -1,46 +1,5 @@
 function draw_tile(tx,ty)
-	local _x1=(tx-1)*16
-	local _y1=(ty-1)*16
-	local _x2=tx*16
-	local _y2=ty*16
-	rectfill(_x1  ,_y1  ,_x2  ,_y2,6) --  4 sarok
-	rectfill(_x1  ,_y1+1,_x2  ,_y2-1,15) -- háttér
-	rectfill(_x1+1,_y1  ,_x2-1,_y2,15) -- háttér
-	rectfill(_x1+1,_y1+1,_x2-1,_y2-1,1) -- 4 sötétkék pötty
-	rectfill(_x1+2,_y1+1,_x2-2,_y2-1,15)  --8 háttérszínű geci megint
-	rectfill(_x1+1,_y1+2,_x2-1,_y2-2,15) --8 háttérszínű geci megint
-	rectfill(_x1+1,_y1+3,_x2-1,_y2-3,13) --lila outline
-	rectfill(_x1+2,_y1+2,_x2-2,_y2-2,13)
-	rectfill(_x1+3,_y1+1,_x2-3,_y2-1,13)
-
-	rectfill(_x1+2,_y1+4,_x2-2,_y2-4,15) --belső háttér
-	rectfill(_x1+3,_y1+3,_x2-3,_y2-3,15)
-	rectfill(_x1+4,_y1+2,_x2-4,_y2-2,15)
-
-	--if (tx==1) then
-	--	rectfill(_x1,_y1,_x1+1,_y2,4)
-	--elseif (tx==8) then 
-	--	rectfill(_x2-2,_y1,_x2,_y2,4)
-	--end
-	--if (ty==1) then
-	--	rectfill(_x1,_y1,_x2,_y1+1,4)
-	--elseif (ty==8) then
-	--	rectfill(_x1,_y2-2,_x2,_y2,4)
-	--end
-	
-
-	--if (tx==8) then--jobboldal
-	--	rectfill(_x2-2,_y1,_x2,_y2,13)
-	--	rectfill(_x1+2,_y1+4,_x2-2,_y2-4,15)
-	--	pset(_x2,_y1,6)
-	--	pset(_x2,_y2,6)
-	--	pset(_x2,_y1+1,1)
-	--	pset(_x2,_y2-1,1)
-	--	pset(_x2-1,_y1,1)
-	--	pset(_x2-1,_y2,1)
-	
-	
-	--end
+	draw_colored_tile(tx,ty,COLORS.LIGHT_GREY,COLORS.LAVENDER,COLORS.LIGHT_PEACH,COLORS.DARK_BLUE)
 end
 
 function draw_map_edge()
