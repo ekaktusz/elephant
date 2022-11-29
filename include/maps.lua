@@ -1,5 +1,5 @@
 --map
-n_lvls=2 --number of levels
+n_lvls=28 --number of levels
 -- t = fal, b = torheto fal, c = csatornafedel, g = gomb, r = racs
 -- m = mogyi, e = elefant, a = ajto, h = egerlyuk,
 -- s = sajt, w = viz, f = egerfogo, p = player
@@ -16,21 +16,21 @@ lvl_tmplt = { --lvl 1
 }
 
 function load_game_map(_lvl)
-	local _colsx=16*((_lvl-1)%8)
-	local _colsy=16*flr((_lvl-1)/8)
-	for i = _colsx, _colsx+14, 2 do
-		for j = _colsy, _colsy+14, 2 do
+	local _colsx=8*((_lvl-1)%16)
+	local _colsy=8*flr((_lvl-1)/16)
+	for i = _colsx, _colsx+7, 1 do
+		for j = _colsy, _colsy+7, 1 do
 			--log('a'..mget(i,j))
 			local _sprite_num = mget(i,j)
 			local _letter = get_letter_for_sprite_num(_sprite_num)
 			log(_letter)
-			lvl_tmplt[(j-_colsy)/2+1][(i-_colsx)/2+1]=_letter
+			lvl_tmplt[j-_colsy+1][i-_colsx+1]=_letter
 		end
 	end
 end
 
 function get_letter_for_sprite_num(_sprite_num)
-	if (_sprite_num == 142 or _sprite_num == 192 or _sprite_num==174 or _sprite_num==194) then
+	if (_sprite_num == 143 or _sprite_num == 208) then
 		return 'a'
 	elseif (_sprite_num == 64) then
 		return 'e'

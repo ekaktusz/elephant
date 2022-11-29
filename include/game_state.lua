@@ -30,7 +30,7 @@ end
 function init_game(lvl)
 	_update = update_game
 	_draw = draw_game
-	current_lvl=10
+	current_lvl=lvl
 	load_game_lvl(current_lvl)
 end
 
