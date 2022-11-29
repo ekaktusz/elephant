@@ -36,7 +36,7 @@ function make_elephant()
 		scared=false,
 		scared_time=40,
 		scared_timer=0,
-		scared_anim_played
+		scared_anim_played=false,
 	}
 	e.x=(e.tx-1)*16
 	e.y=(e.ty-1)*16
@@ -339,8 +339,7 @@ function move_elephant()
 		e.scared_anim_played=true --addig tru amig falhoz nem ér
 		e.sprite=e.scared_sprite
 	end
-
-	if e.scared_anim_played and (e.d==1) and not ecan_move('r') then
+	if e.scared_anim_played and (e.d==1) and not ecan_move('r') then --or (e.d==2) and not ecan_move('l') or (e.d==3) and not ecan_move('u') or (e.d==4) and not ecan_move('d') then
 		e.scared_anim_played=false --ujra meg tud ijedni?
 	end
 

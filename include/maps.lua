@@ -46,9 +46,9 @@ function get_letter_for_sprite_num(_sprite_num)
 		return 'p'
 	elseif (_sprite_num==134) then
 		return 'f'
-	elseif _sprite_num==128 then
+	elseif _sprite_num==128 or _sprite_num==10 or _sprite_num==8 or _sprite_num==40 or _sprite_num==42 or _sprite_num==46 or _sprite_num==228 then 
 		return 't'
-	elseif _sprite_num==160 then
+	elseif _sprite_num==160 or _sprite_num==4 or _sprite_num==36 or _sprite_num==230 then --törhető fal + cserép + wc
 		return 'b'
 	elseif _sprite_num==132 then
 		return 'w'

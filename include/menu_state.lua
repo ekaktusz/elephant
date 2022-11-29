@@ -28,7 +28,7 @@ function update_menu()
 		end
 		if btnp(1) then
 			--switch level high
-			sfx(6)
+			sfx(7)
 			menu_move('r')
 		end
 		if btnp(0) then
@@ -102,7 +102,7 @@ function draw_menu()
 	if mission_selected then
 		if (f%50<=25) then
 			--circfill(64,clvlslct.y+8,10,0)
-			rectfill(clvlslct.x-1,clvlslct.y,clvlslct.x+20,clvlslct.y+26,0)
+			rectfill(clvlslct.x-3,clvlslct.y,clvlslct.x+20,clvlslct.y+26,0)
 		end
 	end
 	
@@ -155,5 +155,9 @@ function draw_lvl_slct()
 	
 	--spr(140,clvlslct.x,clvlslct.y,2,2)
 	--rspr(102,clvlslct.x,clvlslct.y,a,2,2)
-	print("room"..clvl,clvlslct.x-1,clvlslct.y+20,9)
+	if (clvl<10) then
+		print("room"..clvl,clvlslct.x-1,clvlslct.y+20,9)
+	else
+		print("room"..clvl,clvlslct.x-3,clvlslct.y+20,9)
+	end
 end
