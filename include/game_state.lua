@@ -24,6 +24,8 @@ function load_game_lvl(lvl)
 	finished=false
 	reading=false
 	game_anim_speed=5
+	game_over=false
+	game_over_timer=60
 	tb_init(0,{"the elephants are afraid of \nmice. this textbox could help \nthe player with the puzzles"})
 end
 
@@ -35,7 +37,14 @@ function init_game(lvl)
 end
 
 function update_game()
-	if loaded() then
+	if game_over then
+		game_over_timer-=1
+		if (game_over_timer<0) then
+			load_game_lvl(current_lvl)
+		end
+	end
+
+	if loaded() and not game_over then
 		update_player()
 		if (p.first_move) then
 			update_elephant()
@@ -75,7 +84,9 @@ function draw_game()
 	draw_dwater()
 	draw_btraps()
 	drawparts(ppart)
-	draw_player()
+	if not game_over then --ilyenkor a csapda van csak
+		draw_player()
+	end
 	draw_grids()
 	drawparts(epart)
 	draw_traps()
@@ -86,6 +97,8 @@ function draw_game()
 	draw_map_edge()
 	draw_door()
 	drawparts(part)
+
+	draw_deadtrap()
 
 	--draw_vision_border()
 

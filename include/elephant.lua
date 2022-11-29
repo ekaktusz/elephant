@@ -2,6 +2,8 @@
 function make_elephant()
 	e={
 		sprite=64,
+		idle_sprite=64,
+		scared_sprite=72,
 		x=16,
 		y=16,
 		tx=get_tx('e'),
@@ -28,7 +30,13 @@ function make_elephant()
 		seen_player=false,
 		anim_speed=10,
 		eyes_closed=false,
-		last_horizontal_dir='r'
+		last_horizontal_dir='r',
+		vegtelen=0,
+		ending_sound_played=false,
+		scared=false,
+		scared_time=40,
+		scared_timer=0,
+		scared_anim_played
 	}
 	e.x=(e.tx-1)*16
 	e.y=(e.ty-1)*16
@@ -38,19 +46,21 @@ function make_elephant()
 end
 
 function draw_elephant()
-	--poke(0x5f54,0x60)
 
 	--palette shift everything a shade darker
-	
-
 	if not e.hit_freeze then
 		e.stp+=1
 		if(e.stp%e.anim_speed==0) then e.f+=1 end
 		if(e.f>1) then e.f=0 end
 	end
+
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.last_horizontal_dir=='l',false)
 
-	--reset things to normal
+	draw_eyes()
+end
+
+function draw_eyes()
+--reset things to normal
 	--poke(0x5f54,0)
 	 --szem
 	--if e.seen_player then
@@ -110,6 +120,7 @@ function draw_elephant()
 end
 
 function update_elephant_d()
+
 	frame_counter+=1
 	if (frame_counter%100<=20) then
 		e.eyes_closed=true
@@ -142,9 +153,10 @@ function update_elephant_d()
 		e.wall_break_time-=1
 	end
 
-	if (e.hit_freeze) then
+	if e.hit_freeze or e.scared then
 		return
 	end
+
 
 	if (not e.seen_player) then
 		-- is in line with nut
@@ -227,6 +239,29 @@ function ecollide_with_d()
 end
 
 function update_elephant() 
+
+	if e.scared then
+		--e.sprite=e.scared_sprite
+		--sfx(7)
+		if e.scared_timer<e.scared_time then
+			e.scared_timer+=1
+			return
+		else
+			e.scared=false
+			e.scared_timer=0
+			e.sprite=e.idle_sprite
+		end
+		return
+	end
+
+	if e.finish then
+		if not e.ending_sound_played then
+			e.ending_sound_played=true
+			sfx(2)
+		end
+	end
+
+	e.vegtelen+=1
 	move_elephant()
 	ecollide_with_d()
 	
@@ -240,6 +275,9 @@ function update_elephant()
 			--e.d=0
 			update_elephant_d()
 		else
+			if (e.vegtelen%5==0) then
+				sfx(0)
+			end
 			if (e.x>(e.tx-1)*16) then --jobbra megy és mid tile
 				e.ntx=e.tx+1
 			elseif (e.x<(e.tx-1)*16) then --balra megy és mid tile
@@ -249,6 +287,7 @@ function update_elephant()
 			elseif (e.y<(e.ty-1)*16) then --felfele megy és mid tile
 				e.nty=e.ty-1
 			end
+
 		end
 	end
 	
@@ -290,6 +329,19 @@ function move_elephant()
 			e.y+=e.spd
 		end
 		return
+	end
+	--megijedt jobbiranyba
+	if ( (e.d==1) and ecan_move('r')) -- or (e.d==2) and ecan_move('l') or (e.d==3) and ecan_move('u') or (e.d==4) and ecan_move('d') )
+		 and e.seen_player and not e.scared_anim_played then
+		sfx(7)
+		log('wtf')
+		e.scared=true
+		e.scared_anim_played=true --addig tru amig falhoz nem ér
+		e.sprite=e.scared_sprite
+	end
+
+	if e.scared_anim_played and (e.d==1) and not ecan_move('r') then
+		e.scared_anim_played=false --ujra meg tud ijedni?
 	end
 
 	if (e.d==1) and ecan_move('r') and (e.should_move or e.seen_player)

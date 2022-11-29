@@ -6,7 +6,7 @@ function init_menu()
 	clvl=1
 	_update = update_menu
 	_draw = draw_menu
-	music(0)
+	--music(0)
 	make_lvl_slclts()
 	anim_timer2=92
 	select_timer=120
@@ -22,15 +22,18 @@ function update_menu()
 	if not mission_selected then
 		if btnp(5) then
 			--music(-1,700)
+			sfx(5)
 			mission_selected=true
 			--anim_start=true
 		end
 		if btnp(1) then
 			--switch level high
+			sfx(6)
 			menu_move('r')
 		end
 		if btnp(0) then
 			--switch level low
+			sfx(7)
 			menu_move('l')
 		end
 	end

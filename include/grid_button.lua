@@ -37,6 +37,7 @@ end
 function press_button()
 	if is_on_tile(p.tx,p.ty,'g') and not e_undergrid() then
 		b.pressed= not b.pressed
+		sfx(5)
 	end
 end
 

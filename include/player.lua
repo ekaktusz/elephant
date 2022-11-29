@@ -18,7 +18,8 @@ function make_player()
 		spd=2,
 		has_nut=false,
 		first_move=false,
-		hit_trap=false
+		hit_trap=false,
+		vegtelen=0
 	}
 	p.x=(p.tx-1)*16
 	p.y=(p.ty-1)*16
@@ -41,7 +42,6 @@ function draw_player()
 	if (p.has_nut) then
 		spr(nsprite,p.x,p.y,2,2)
 	end
-	
 end
 
 function anim_player()
@@ -50,7 +50,8 @@ function anim_player()
 end
 
 function update_player()
-	
+	pcollide_with_trap()
+	p.vegtelen+=1
 	move_player()
 	if (btnp(5)) then
 		--handle nut taking
@@ -67,6 +68,9 @@ function update_player()
 	end
 	if p.walking then
 		spawntrail(p.x+8,p.y+8,4,4,5,6,ppart)
+		if (p.vegtelen%5==0) then
+			sfx(4)
+		end
 	end
 	updateparts(ppart)
 end

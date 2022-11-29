@@ -24,6 +24,7 @@ function pcollide_with_nut()
 		if n.tx==p.tx and n.ty==p.ty and not p.has_nut then
 			p.has_nut=true
 			del(nuts,n)
+			sfx(6)
 			return
 		end
 	end
@@ -39,6 +40,7 @@ function ecollide_with_nut()
 		e.d=0
 		e.hit_freeze=true
 		e.current_c=e.nut_eat_c
+		sfx(1)
  		return
  	end
 	end

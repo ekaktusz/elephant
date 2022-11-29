@@ -34,6 +34,7 @@ function ecollide_with_water()
  		e.d=0
 		e.current_c=e.w_drink_c
  		e.hit_freeze=true
+		sfx(8)
  		return
  	end
 	end
