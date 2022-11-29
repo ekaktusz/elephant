@@ -1,9 +1,66 @@
 --map
-n_lvls=8 --number of levels
+n_lvls=2 --number of levels
 -- t = fal, b = torheto fal, c = csatornafedel, g = gomb, r = racs
--- m = mogyi, e = elefant, a = ajto, h = egerlyuk, w = viz
+-- m = mogyi, e = elefant, a = ajto, h = egerlyuk,
+-- s = sajt, w = viz, f = egerfogo, p = player
+
+lvl_tmplt = { --lvl 1
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
+	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'}
+}
+
+function load_game_map(_lvl)
+	local _colsx=16*((_lvl-1)%8)
+	local _colsy=16*flr((_lvl-1)/8)
+	for i = _colsx, _colsx+14, 2 do
+		for j = _colsy, _colsy+14, 2 do
+			--log('a'..mget(i,j))
+			local _sprite_num = mget(i,j)
+			local _letter = get_letter_for_sprite_num(_sprite_num)
+			log(_letter)
+			lvl_tmplt[(j-_colsy)/2+1][(i-_colsx)/2+1]=_letter
+		end
+	end
+end
+
+function get_letter_for_sprite_num(_sprite_num)
+	if (_sprite_num == 142 or _sprite_num == 192 or _sprite_num==174 or _sprite_num==194) then
+		return 'a'
+	elseif (_sprite_num == 64) then
+		return 'e'
+	elseif (_sprite_num==138) then
+		return 'r'
+	elseif (_sprite_num==162) then
+		return 'h'
+	elseif (_sprite_num==192) then
+		return 'c'
+	elseif (_sprite_num==140) then
+		return 'm'
+	elseif (_sprite_num==2 or _sprite_num==32 or _sprite_num==34) then --ez nem lehet 0
+		return 'p'
+	elseif (_sprite_num==134) then
+		return 'f'
+	elseif _sprite_num==128 then
+		return 't'
+	elseif _sprite_num==160 then
+		return 'b'
+	elseif _sprite_num==132 then
+		return 'w'
+	elseif _sprite_num==136 then
+		return 'g'
+	else -- 0
+		return 'x'
+	end
+end
+
 lvls={
-	{ --lvl1
+	{ --lvl 1
 		{'t', 't', 't', 't', 'x', 'x', 't', 't'},
 		{'t', 'x', 'x', 'x', 'x', 'x', 'x', 't'},
 		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 't'},
@@ -12,75 +69,5 @@ lvls={
 		{'t', 'e', 'x', 'x', 'x', 'x', 'x', 'a'},
 		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
 		{'t', 'x', 'x', 'x', 'p', 't', 't', 't'}
-	},
-	{ --lvl2
-		{'p', 'x', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'e', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'x', 'x', 't', 't', 't', 't', 't'},
-		{'t', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'t', 'x', 'x', 'x', 'x', 'm', 'x', 'a'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'}
-	},
-	{ --lvl3
-		{'p', 'x', 'x', 'x', 'x', 'x', 't', 't'},
-		{'t', 't', 't', 't', 't', 'x', 't', 't'},
-		{'t', 't', 't', 'x', 'x', 'm', 't', 't'},
-		{'t', 't', 't', 'x', 't', 'x', 't', 't'},
-		{'t', 't', 't', 'e', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 'x', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'}
-	},
-	{ --lvl4
-		{'t', 't', 'g', 'a', 'a', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'r', 'r', 'r', 't', 't', 't'},
-		{'t', 't', 'x', 'e', 'x', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'x', 'x', 'x', 't', 't', 't'},
-		{'t', 't', 'p', 'x', 'x', 't', 't', 't'}
-	},
-	{ --lvl5
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 'x', 'x', 'm', 't', 't'},
-		{'t', 't', 't', 't', 'x', 't', 't', 't'},
-		{'e', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'x', 'x', 'x', 'p', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'},
-		{'t', 't', 't', 't', 't', 't', 't', 't'}
-	},
-	{ --lvl6
-		{'p', 'x', 'x', 'x', 'x', 'x', 'x', 'm'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
-		{'t', 't', 't', 'x', 'x', 'x', 'x', 'x'},
-		{'e', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'a'},
-		{'t', 't', 't', 'x', 'x', 'x', 'x', 'x'}
-	},
-	{ --testlvl7
-		{'x', 'x', 'g', 'c', 'x', 'x', 'c', 'm'},
-		{'t', 't', 'h', 't', 't', 't', 'r', 'r'},
-		{'x', 'c', 'e', 'x', 'x', 'b', 'x', 'x'},
-		{'x', 'c', 'x', 'x', 'x', 'b', 'x', 'x'},
-		{'x', 't', 'x', 'x', 'x', 't', 'r', 'r'},
-		{'x', 't', 'x', 'x', 'x', 't', 'x', 'x'},
-		{'x', 'x', 'p', 'm', 'x', 'h', 'x', 'x'},
-		{'x', 'x', 'x', 'x', 'x', 't', 'a', 'a'}
-	},
-	{ --testlvl8
-		{'a', 'a', 'x', 'g', 'x', 'x', 'x', 'x'},
-		{'r', 'r', 'c', 'c', 'c', 'b', 'r', 'r'},
-		{'x', 'r', 'x', 'e', 'x', 'b', 'x', 'm'},
-		{'x', 'r', 'x', 'x', 'x', 'b', 'x', 'x'},
-		{'r', 'r', 'b', 'x', 'x', 't', 'r', 'r'},
-		{'x', 'x', 'b', 'x', 'x', 't', 'c', 'c'},
-		{'x', 'x', 'b', 'm', 'x', 'x', 'x', 'x'},
-		{'m', 'x', 'h', 'p', 'x', 'x', 'x', 'x'}
 	}
 }

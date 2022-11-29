@@ -19,7 +19,7 @@ function draw_map()
 end
 
 function make_gamemap()
-	gamemap=deepcopy(lvls[current_lvl])
+	gamemap=lvl_tmplt
 end
 
 function get_all_tile_pos(obj)

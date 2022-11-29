@@ -17,7 +17,8 @@ function make_player()
 		walking=false,
 		spd=2,
 		has_nut=false,
-		first_move=false
+		first_move=false,
+		hit_trap=false
 	}
 	p.x=(p.tx-1)*16
 	p.y=(p.ty-1)*16
@@ -44,8 +45,8 @@ function draw_player()
 end
 
 function anim_player()
- p.t=(p.t+1)%p.stp
- if (p.t==0) p.f=p.f%#p.walk[p.d]+1
+	p.t=(p.t+1)%p.stp
+	if (p.t==0) p.f=p.f%#p.walk[p.d]+1
 end
 
 function update_player()

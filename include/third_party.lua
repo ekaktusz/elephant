@@ -100,29 +100,6 @@ function deepcopy(orig)
 end
 
 --rotating sprite
-function spr_r(s,x,y,a,w,h)
-	sw=(w or 1)*8
-	sh=(h or 1)*8
-	sx=(s%8)*8
-	sy=flr(s/8)*8
-	x0=flr(0.5*sw)
-	y0=flr(0.5*sh)
-	a=a/360
-	sa=sin(a)
-	ca=cos(a)
-	for ix=0,sw-1 do
-		for iy=0,sh-1 do
-			dx=ix-x0
-			dy=iy-y0
-			xx=flr(dx*ca-dy*sa+x0)
-			yy=flr(dx*sa+dy*ca+y0)
-			if (xx>=0 and xx<sw and yy>=0 and yy<=sh) then
-				pset(x+ix,y+iy,sget(sx+xx,sy+yy))
-			end
-		end
-	end
-end
-
 function rspr(s,x,y,a,w,h)
  sw=(w or 1)*8
  sh=(h or 1)*8
@@ -150,92 +127,92 @@ function rspr(s,x,y,a,w,h)
 end
 
 function doshake()
-	 -- this function does the
-	 -- shaking
-	 -- first we generate two
-	 -- random numbers between
-	 -- -16 and +16
-	 local shakex=16-rnd(32)
-	 local shakey=16-rnd(32)
-	
-	 -- then we apply the shake
-	 -- strength
-	 shakex*=shake
-	 shakey*=shake
-	 
-	 -- then we move the camera
-	 -- this means that everything
-	 -- you draw on the screen
-	 -- afterwards will be shifted
-	 -- by that many pixels
-	 camera(shakex,shakey)
-	 
-	 -- finally, fade out the shake
-	 -- reset to 0 when very low
-	 shake = shake*0.95
-	 if (shake<0.05) shake=0
+	-- this function does the
+	-- shaking
+	-- first we generate two
+	-- random numbers between
+	-- -16 and +16
+	local shakex=16-rnd(32)
+	local shakey=16-rnd(32)
+
+	-- then we apply the shake
+	-- strength
+	shakex*=shake
+	shakey*=shake
+
+	-- then we move the camera
+	-- this means that everything
+	-- you draw on the screen
+	-- afterwards will be shifted
+	-- by that many pixels
+	camera(shakex,shakey)
+
+	-- finally, fade out the shake
+	-- reset to 0 when very low
+	shake = shake*0.95
+	if (shake<0.05) shake=0
 	end
-	
+
 	function fadepal(_perc)
-	 -- this function sets the
-	 -- color palette so everything
-	 -- you draw afterwards will
-	 -- appear darker
-	 -- it accepts a number from
-	 -- 0 means normal
-	 -- 1 is completely black
-	 -- this function has been
-	 -- adapted from the jelpi.p8
-	 -- demo
-	 
-	 -- first we take our argument
-	 -- and turn it into a 
-	 -- percentage number (0-100)
-	 -- also making sure its not
-	 -- out of bounds  
-	 local p=flr(mid(0,_perc,1)*100)
-	 
-	 -- these are helper variables
-	 local kmax,col,dpal,j,k
-	 
-	 -- this is a table to do the
-	 -- palette shifiting. it tells
-	 -- what number changes into
-	 -- what when it gets darker
-	 -- so number 
-	 -- 15 becomes 14
-	 -- 14 becomes 13
-	 -- 13 becomes 1
-	 -- 12 becomes 3
-	 -- etc...
-	 dpal={0,1,1, 2,1,13,6,
-	          4,4,9,3, 13,1,13,14}
-	 
-	 -- now we go trough all colors
-	 for j=1,15 do
-	  --grab the current color
-	  col = j
-	  
-	  --now calculate how many
-	  --times we want to fade the
-	  --color.
-	  --this is a messy formula
-	  --and not exact science.
-	  --but basically when kmax
-	  --reaches 5 every color gets 
-	  --turns black.
-	  kmax=(p+(j*1.46))/22
-	  
-	  --now we send the color 
-	  --through our table kmax
-	  --times to derive the final
-	  --color
-	  for k=1,kmax do
-	   col=dpal[col]
-	  end
-	  
-	  --finally, we change the
-	  --palette
-	  pal(j,col)
-	 end
+	-- this function sets the
+	-- color palette so everything
+	-- you draw afterwards will
+	-- appear darker
+	-- it accepts a number from
+	-- 0 means normal
+	-- 1 is completely black
+	-- this function has been
+	-- adapted from the jelpi.p8
+	-- demo
+
+	-- first we take our argument
+	-- and turn it into a 
+	-- percentage number (0-100)
+	-- also making sure its not
+	-- out of bounds  
+	local p=flr(mid(0,_perc,1)*100)
+
+	-- these are helper variables
+	local kmax,col,dpal,j,k
+
+	-- this is a table to do the
+	-- palette shifiting. it tells
+	-- what number changes into
+	-- what when it gets darker
+	-- so number 
+	-- 15 becomes 14
+	-- 14 becomes 13
+	-- 13 becomes 1
+	-- 12 becomes 3
+	-- etc...
+	dpal={0,1,1, 2,1,13,6,
+			4,4,9,3, 13,1,13,14}
+
+	-- now we go trough all colors
+	for j=1,15 do
+	--grab the current color
+	col = j
+
+	--now calculate how many
+	--times we want to fade the
+	--color.
+	--this is a messy formula
+	--and not exact science.
+	--but basically when kmax
+	--reaches 5 every color gets 
+	--turns black.
+	kmax=(p+(j*1.46))/22
+
+	--now we send the color 
+	--through our table kmax
+	--times to derive the final
+	--color
+	for k=1,kmax do
+		col=dpal[col]
 	end
+
+	--finally, we change the
+	--palette
+	pal(j,col)
+	end
+end

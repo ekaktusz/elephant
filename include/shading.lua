@@ -16,6 +16,7 @@ COLORS={
     PINK=14,
     LIGHT_PEACH=15
 }
+
 function begin_dark()
     --pal({0,1,1,2,0,5,5,2,5,13,3,1,1,2,13})
     --https://www.lexaloffle.com/bbs/files/10006/db-pico-pre.png

@@ -1,5 +1,6 @@
 --game state
 function load_game_lvl(lvl)
+	load_game_map(lvl)
 	anim_timer=0
 	finish_anim_timer=92
 	tile_size=16
@@ -14,6 +15,7 @@ function load_game_lvl(lvl)
 	make_bwall()
 	init_button()
 	init_grids()
+	make_traps()
 	make_mhc()
 	make_h()
 	shake=0
@@ -28,7 +30,7 @@ end
 function init_game(lvl)
 	_update = update_game
 	_draw = draw_game
-	current_lvl=lvl
+	current_lvl=10
 	load_game_lvl(current_lvl)
 end
 
@@ -37,6 +39,7 @@ function update_game()
 		update_player()
 		if (p.first_move) then
 			update_elephant()
+			update_btraps()
 		end
 	end
 	if not loaded() then
@@ -70,10 +73,12 @@ function draw_game()
 	draw_button()
 	draw_eaten_nuts()
 	draw_dwater()
+	draw_btraps()
 	drawparts(ppart)
 	draw_player()
 	draw_grids()
 	drawparts(epart)
+	draw_traps()
 	draw_elephant()
 	draw_nuts()
 	draw_water()

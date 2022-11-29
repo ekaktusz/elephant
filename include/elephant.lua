@@ -119,6 +119,7 @@ function update_elephant_d()
 	ecollide_with_nut()
 	ecollide_with_water()
 	ecollide_with_bwall()
+	ecollide_with_trap()
 	
 	if e.hit_freeze then
 		--wait 10 frame
