@@ -97,6 +97,7 @@ function get_ty(obj)
  return 0
 end
 
+-- ty az y pozicio, a sor amiben vagunk, a tx1, tx2 peddig a két tile
 function can_see_through_x(tx1,tx2,ty)
 	local x1=min(tx1,tx2)
 	local x2=max(tx1,tx2)

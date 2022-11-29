@@ -63,6 +63,7 @@ function draw_game()
 	draw_map()
 	--spr(140,112,32,2,2) -- mogyoro
 	--spr(64,16,16,4,4)   -- elefant
+	shade_seen_tiles()
 	draw_wall()
 	draw_bwall()
 	draw_mhc()
@@ -80,6 +81,13 @@ function draw_game()
 	draw_map_edge()
 	draw_door()
 	drawparts(part)
+
+	--draw_vision_border()
+
+	--shade_unseen_tiles()
+
+	--shade_seen_tiles()
+
 	if current_lvl==1 then tb_draw() end 
 		
 	if not loaded() then
@@ -89,7 +97,6 @@ function draw_game()
 	if finished then
 		load_anim(finish_anim_timer)
 	end
-
 	doshake()
 end
 

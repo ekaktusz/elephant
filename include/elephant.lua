@@ -38,12 +38,20 @@ function make_elephant()
 end
 
 function draw_elephant()
+	--poke(0x5f54,0x60)
+
+	--palette shift everything a shade darker
+	
+
 	if not e.hit_freeze then
 		e.stp+=1
 		if(e.stp%e.anim_speed==0) then e.f+=1 end
 		if(e.f>1) then e.f=0 end
 	end
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.last_horizontal_dir=='l',false)
+
+	--reset things to normal
+	--poke(0x5f54,0)
 	 --szem
 	--if e.seen_player then
 	--	if (e.d==1) then
