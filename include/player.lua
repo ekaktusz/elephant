@@ -3,8 +3,8 @@ function make_player()
 	p={
 		x=0,
 		y=0,
-		tx=get_tx('p'),
-		ty=get_ty('p'),
+		tx=get_tx(sprite_nums.player_top1),
+		ty=get_ty(sprite_nums.player_top1),
 		dx=0,
 		dy=0,
 		w=15,
@@ -78,11 +78,14 @@ end
 function pcan_move(d)
 	--d: direction 'l' 'r' 'u' 'd'
 	if  is_end_of_map(p.tx,p.ty,d) or 
-		   is_tile_on_side(p.tx,p.ty,'e',d) or
-		   is_tile_on_side(p.tx,p.ty,'w',d) or
-		   is_tile_on_side(p.tx,p.ty,'t',d) or
-		   is_tile_on_side(p.tx,p.ty,'b',d) or
-		   is_tile_on_side(p.tx,p.ty,'c',d) then
+		   is_tile_on_side(p.tx,p.ty,sprite_nums.elephant1,d) or
+		   is_tile_on_side(p.tx,p.ty,sprite_nums.water1,d) or
+		   is_tile_on_side(p.tx,p.ty,sprite_nums.wall,d) or
+		   is_tile_on_side(p.tx,p.ty,sprite_nums.bwall,d) or
+		   is_tile_on_side(p.tx,p.ty,sprite_nums.mhc,d) or
+		   (is_tile_on_side(p.tx,p.ty,sprite_nums.vhole,d) and (d=='r' or d=='l')) or
+		   (is_tile_on_side(p.tx,p.ty,sprite_nums.hhole,d) and (d=='u' or d=='d'))
+		then
 		return false
 	end
 	return true
@@ -116,7 +119,7 @@ function move_player()
 	 		--p.tx=1
 	 		--p.x=(p.tx-1)*16
 	 	end
- 		--gamemap[p.ty][p.tx]='p'
+ 		--gamemap[p.ty][p.tx]=sprite_nums.player_top1
  	end
  	--but if on a tile, allow new input
 		else

@@ -1,7 +1,7 @@
 --nuts
 
 function make_nuts()
-	nuts=get_all_tile_pos('m')
+	nuts=get_all_tile_pos(sprite_nums.peanut)
 	enuts={}
 	nsprite=140
 	ensprite=200
@@ -47,7 +47,9 @@ function ecollide_with_nut()
 end
 
 function place_nut()
-	if (p.has_nut) and not is_on_tile(p.tx,p.ty,'m') and not is_on_tile(p.tx,p.ty,'r') and not is_on_tile(p.tx,p.ty,'h')  and not is_on_tile(p.tx,p.ty,'g') then
+	if (p.has_nut) and not is_on_tile(p.tx,p.ty,sprite_nums.peanut) and not is_on_tile(p.tx,p.ty,sprite_nums.grid1) 
+	and not is_on_tile(p.tx,p.ty,sprite_nums.hhole) and not is_on_tile(p.tx,p.ty,sprite_nums.vhole) 
+	 and not is_on_tile(p.tx,p.ty,sprite_nums.button1) then
 		nuts[#nuts+1] = {tx=p.tx, ty=p.ty}
 		p.has_nut=false
 	end

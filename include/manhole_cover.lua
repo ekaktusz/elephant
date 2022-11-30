@@ -1,12 +1,12 @@
 --manholecover
 
 function make_mhc()
-	mhcs=get_all_tile_pos('c')
+	mhcs=get_all_tile_pos(sprite_nums.mhc)
 	mhcsprite=196
 end
 
 function draw_mhc()
 	for _,mhc in ipairs(mhcs) do
-    spr(mhcsprite,(mhc.tx-1)*16,(mhc.ty-1)*16,2,2)
+    	spr(mhcsprite,(mhc.tx-1)*16,(mhc.ty-1)*16,2,2)
 	end
 end

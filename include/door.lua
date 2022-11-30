@@ -1,13 +1,13 @@
 function make_door()
 	d={
-		tx=get_tx('a'),
-		ty=get_ty('a'),
+		tx=get_tx(sprite_nums.vdoor),
+		ty=get_ty(sprite_nums.vdoor),
 		vsprite=142,
 		hsprite=192,
 		d='r' --direction
 	}
 	--door direction
-	tmp=get_all_tile_pos('a')
+	tmp=get_all_tile_pos(sprite_nums.vdoor)
 	tty=tmp[2].ty
 	ttx=tmp[2].tx
 	if (tty==d.ty) then

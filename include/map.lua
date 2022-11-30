@@ -22,38 +22,38 @@ function make_gamemap()
 	gamemap=lvl_tmplt
 end
 
-function get_all_tile_pos(obj)
+function get_all_tile_pos(_sprnum)
 	local t = {}
 	for i = 1, 8 do
- 	for j = 1, 8 do
-  	if gamemap[i][j]==obj then
-  		t[#t+1] = {tx=j, ty=i}
-  	end
- 	end
- end
- return t
+		for j = 1, 8 do
+			if gamemap[i][j]==_sprnum then
+				t[#t+1] = {tx=j, ty=i, sprt=_sprnum}
+			end
+		end
+	end
+	return t
 end
 
-function get_tx(obj)
+function get_tx(_sprnum)
 	for i = 1, 8 do
- 	for j = 1, 8 do
-  	if gamemap[i][j]==obj then
-  		return j
-  	end
+		for j = 1, 8 do
+			if gamemap[i][j]==_sprnum then
+				return j
+			end
+		end
  	end
- end
 	return 0
 end
 
-function get_ty(obj)
+function get_ty(_sprnum)
 	for i = 1, 8 do
- 	for j = 1, 8 do
-  	if gamemap[i][j]==obj then
-  		return i
-  	end
- 	end
- end
- return 0
+		for j = 1, 8 do
+			if gamemap[i][j]==_sprnum then
+				return i
+			end
+ 		end
+	end
+	return 0
 end
 
 -- ty az y pozicio, a sor amiben vagunk, a tx1, tx2 peddig a két tile
@@ -61,9 +61,18 @@ function can_see_through_x(tx1,tx2,ty)
 	local x1=min(tx1,tx2)
 	local x2=max(tx1,tx2)
 	for i=x1,x2 do
-		if gamemap[ty][i]=='t'
-		or gamemap[ty][i]=='b'
-		or gamemap[ty][i]=='h' then
+		if gamemap[ty][i]==sprite_nums.wall
+		or gamemap[ty][i]==sprite_nums.bwall
+		or gamemap[ty][i]==sprite_nums.hhole
+		or gamemap[ty][i]==sprite_nums.vhole
+		or gamemap[ty][i]==sprite_nums.plant
+		or gamemap[ty][i]==sprite_nums.wc
+		or gamemap[ty][i]==sprite_nums.old_tv
+		or gamemap[ty][i]==sprite_nums.new_tv
+		or gamemap[ty][i]==sprite_nums.green1
+		or gamemap[ty][i]==sprite_nums.green2
+		or gamemap[ty][i]==sprite_nums.pink1
+		or gamemap[ty][i]==sprite_nums.pink2  then
 			return false
 		end
 	end
@@ -74,9 +83,18 @@ function can_see_through_y(ty1,ty2,tx)
 	local y1=min(ty1,ty2)
 	local y2=max(ty1,ty2)
 	for i=y1,y2 do
-		if gamemap[i][tx]=='t'
-		or gamemap[i][tx]=='b'
-		or gamemap[i][tx]=='h' then
+		if gamemap[i][tx]==sprite_nums.wall
+		or gamemap[i][tx]==sprite_nums.bwall
+		or gamemap[i][tx]==sprite_nums.hhole
+		or gamemap[i][tx]==sprite_nums.vhole
+		or gamemap[i][tx]==sprite_nums.plant
+		or gamemap[i][tx]==sprite_nums.wc
+		or gamemap[i][tx]==sprite_nums.old_tv
+		or gamemap[i][tx]==sprite_nums.new_tv
+		or gamemap[i][tx]==sprite_nums.green1
+		or gamemap[i][tx]==sprite_nums.green2
+		or gamemap[i][tx]==sprite_nums.pink1
+		or gamemap[i][tx]==sprite_nums.pink2 then
 			return false
 		end
 	end
@@ -93,7 +111,7 @@ end
 
 function is_on_tile(tx,ty,letter)
 	--nut
-	if letter=='m' then
+	if letter==sprite_nums.peanut then
 		for _, n in ipairs(nuts) do
 			if n.tx==tx and n.ty==ty then
 				return true
@@ -102,14 +120,14 @@ function is_on_tile(tx,ty,letter)
 	   return false
 	end
 	--button
-	if letter=='g' then
+	if letter==sprite_nums.button1 then
 		if b.tx==tx and b.ty==ty then
 			return true
 		end
 		return false
 	end
 	--grid
-	if (letter=='r') then
+	if (letter==sprite_nums.grid1) then
 		for _, g in ipairs(grids) do
 			if (g.tx==tx and g.ty==ty) then
 				return true
@@ -119,7 +137,7 @@ function is_on_tile(tx,ty,letter)
 	end
 	
 	--hole
-	if (letter=='h') then
+	if (letter==sprite_nums.hhole or letter==sprite_nums.vhole) then
 		return gamemap[ty][tx]==letter
 	end
 end
@@ -144,15 +162,23 @@ function is_tile_on_side(tx,ty,letter,side)
 	end -- not possible
 	
 	-- brick or manholecover
-	if (letter=='t' or letter=='c' or letter=='h') then 
+	if (letter==sprite_nums.mhc or letter==sprite_nums.hhole or letter==sprite_nums.vhole) then 
 		if (gamemap[sty][stx]==letter) then --since it cant be removed
 			return true
 		end
 	end
 	
+	--wall
+	if (letter==sprite_nums.wall) then 
+		for _, w in ipairs(walls) do
+			if (w.tx==stx and w.ty==sty) then
+				return true
+			end
+		end
+	end
 	
 	-- break wall
-	if (letter=='b') then 
+	if (letter==sprite_nums.bwall) then 
 		for _, bw in ipairs(bwalls) do
 			if (bw.tx==stx and bw.ty==sty) then
 				return true
@@ -161,7 +187,7 @@ function is_tile_on_side(tx,ty,letter,side)
 	end
 	
 	-- water
-	if (letter=='w') then 
+	if (letter==sprite_nums.water1) then 
 		for _, w in ipairs(water) do
 			if (w.tx==stx and w.ty==sty) then
 				return true
@@ -170,7 +196,7 @@ function is_tile_on_side(tx,ty,letter,side)
 	end
 	
 	-- elephant
-	if letter=='e' then
+	if letter==sprite_nums.elephant1 then
 		if e.finish then 
 			return false 
 		end
@@ -196,14 +222,14 @@ function is_tile_on_side(tx,ty,letter,side)
 	end
 	
 	--door
-	if letter=='a' then
+	if letter==sprite_nums.vdoor then
 		if(stx==d.tx) and (sty==d.ty) then
 			return true
 		end
 	end
 	
 	--grid
-	if (letter=='r') then
+	if (letter==sprite_nums.grid1) then
 		for _, g in ipairs(grids) do
 			if (g.tx==stx and g.ty==sty) then
 			return true
@@ -212,7 +238,7 @@ function is_tile_on_side(tx,ty,letter,side)
 	end
 	
 	--button
-	if (letter=='g') then
+	if (letter==sprite_nums.button1) then
 		if (b.tx==stx and b.ty==sty) then
 			return true
 		end

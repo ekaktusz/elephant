@@ -1,6 +1,6 @@
 --water
 function make_water()
-	water=get_all_tile_pos('w')
+	water=get_all_tile_pos(sprite_nums.water1)
 	dwater={}
 	wtrsprite=132 --164
 	dwtrsprite=202

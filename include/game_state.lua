@@ -111,9 +111,10 @@ function draw_game()
 
 	--draw_assist_view()
 
-	if current_lvl==1 then tb_draw() end 
+	if current_lvl==1 and loaded() then tb_draw() end 
 		
 	if not loaded() then
+		print_current_map_number()
 		load_anim(anim_timer)
 	end
 
@@ -141,6 +142,11 @@ end
 
 function switch_level(lvl)
 	load_game_lvl(lvl)
+end
+
+function print_current_map_number()
+	rectfill(40,40,100,100,0)
+	obprint("room"..current_lvl,40,40,7,0,2)
 end
 
 function next_level()

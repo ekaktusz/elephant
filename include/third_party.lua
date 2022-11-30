@@ -216,3 +216,10 @@ function doshake()
 	pal(j,col)
 	end
 end
+
+function table_concat(t1,t2) --feltetelezzuk hogy object
+    for i=1,#t2 do
+        t1[#t1+1] = {tx=t2[i].tx, ty=t2[i].ty, sprt=t2[i].sprt}
+    end
+    return t1
+end

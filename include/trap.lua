@@ -1,6 +1,6 @@
 
 function make_traps()
-    traps=get_all_tile_pos('f')
+    traps=get_all_tile_pos(sprite_nums.trap_open)
     btraps={} --broken traps
     dead_trap={
         tx=0,

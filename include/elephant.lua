@@ -6,8 +6,8 @@ function make_elephant()
 		scared_sprite=72,
 		x=16,
 		y=16,
-		tx=get_tx('e'),
-		ty=get_ty('e'),
+		tx=get_tx(sprite_nums.elephant1),
+		ty=get_ty(sprite_nums.elephant1),
 		ntx=0,
 		nty=0,
 		w=31,
@@ -88,41 +88,45 @@ function draw_eyes()
 	--	end	
 	--end
 	
-	--if (e.d==1 or e.d==3 or e.d==4 or e.d==0) then
-	--	if (e.f==0 ) then
-	--		rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
-	--		rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
-	--		if(e.eyes_closed) then
-	--			rectfill(e.x+24,e.y+8,e.x+27,e.y+11,6)
-	--		end
-	--	else 
-	--		rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
-	--		rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
-	--		if(e.eyes_closed) then
-	--			rectfill(e.x+24,e.y+9,e.x+27,e.y+12,6)
-	--		end
-	--	end
-	--elseif (e.d==2) then
-	--	if (e.f==0 ) then
-	--		rectfill(e.x+4,e.y+8,e.x+7,e.y+11,7) --szemfeherje
-	--		rectfill(e.x+4,e.y+10,e.x+5,e.y+11,1) --pupilla
-	--		if(e.eyes_closed) then
-	--			rectfill(e.x+4,e.y+8,e.x+7,e.y+11,6)
-	--		end
-	--	else 
-	--		rectfill(e.x+4,e.y+9,e.x+7,e.y+12,7) --szemfeherje
-	--		rectfill(e.x+4,e.y+11,e.x+5,e.y+12,1) --pupilla
-	--		if(e.eyes_closed) then
-	--			rectfill(e.x+4,e.y+9,e.x+7,e.y+12,6)
-	--		end
-	--	end
-	--end
+	if (e.d==1 or e.d==3 or e.d==4 or e.d==0) then
+		if (e.f==0 ) then
+			rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
+			rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
+			if(e.eyes_closed) then
+				rectfill(e.x+24,e.y+6,e.x+27,e.y+11,6)
+				rectfill(e.x+24,e.y+11,e.x+27,e.y+11,5)
+			end
+		else 
+			rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
+			rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
+			if(e.eyes_closed) then
+				rectfill(e.x+24,e.y+7,e.x+27,e.y+12,6)
+				rectfill(e.x+24,e.y+12,e.x+27,e.y+12,5)
+			end
+		end
+	elseif (e.d==2) then
+		if (e.f==0 ) then
+			rectfill(e.x+4,e.y+8,e.x+7,e.y+11,7) --szemfeherje
+			rectfill(e.x+4,e.y+10,e.x+5,e.y+11,1) --pupilla
+			if(e.eyes_closed) then
+				rectfill(e.x+4,e.y+6,e.x+7,e.y+11,6)
+				rectfill(e.x+4,e.y+11,e.x+7,e.y+11,5)
+			end
+		else 
+			rectfill(e.x+4,e.y+9,e.x+7,e.y+12,7) --szemfeherje
+			rectfill(e.x+4,e.y+11,e.x+5,e.y+12,1) --pupilla
+			if(e.eyes_closed) then
+				rectfill(e.x+4,e.y+7,e.x+7,e.y+12,6) --szürkítés
+				rectfill(e.x+4,e.y+12,e.x+7,e.y+12,5) --also vonal
+			end
+		end
+	end
 end
 
 function update_elephant_d()
 
 	frame_counter+=1
-	if (frame_counter%100<=20) then
+	if (frame_counter%120<=5) then
 		e.eyes_closed=true
 	else
 		e.eyes_closed=false
@@ -229,10 +233,10 @@ function update_elephant_d()
 end
 
 function ecollide_with_d()
-	if (e.d==1 and d.d=='r' and is_tile_on_side(e.tx,e.ty,'a','r')) or
-	   (e.d==2 and d.d=='l' and is_tile_on_side(e.tx+1,e.ty,'a','l')) or
-	   (e.d==3 and d.d=='u' and is_tile_on_side(e.tx,e.ty+1,'a','u')) or
-	   (e.d==4 and d.d=='d' and is_tile_on_side(e.tx,e.ty,'a','d'))
+	if (e.d==1 and d.d=='r' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'r')) or
+	   (e.d==2 and d.d=='l' and is_tile_on_side(e.tx+1,e.ty,sprite_nums.vdoor,'l')) or
+	   (e.d==3 and d.d=='u' and is_tile_on_side(e.tx,e.ty+1,sprite_nums.vdoor,'u')) or
+	   (e.d==4 and d.d=='d' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'d'))
 	then		
 		e.finish=true
 	end
@@ -383,10 +387,11 @@ end
 function ecan_move(d)
 	--d: direction 'l' 'r' 'u' 'd'
 	if eis_end_of_map(d) or 
-	   eis_tile_on_side('p',d) or
-	   eis_tile_on_side('t',d) or
-	   eis_tile_on_side('h',d) or
-	   (eis_tile_on_side('r',d) and not b.pressed) then
+	   eis_tile_on_side(sprite_nums.player_top1,d) or
+	   eis_tile_on_side(sprite_nums.wall,d) or
+	   eis_tile_on_side(sprite_nums.hhole,d) or
+	   eis_tile_on_side(sprite_nums.vhole,d) or
+	   (eis_tile_on_side(sprite_nums.grid1,d) and not b.pressed) then
 		return false
 	end
 	return true
