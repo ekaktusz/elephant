@@ -18,6 +18,7 @@ function load_game_lvl(lvl)
 	make_traps()
 	make_mhc()
 	make_h()
+	make_carpet()
 	shake=0
 	develop=0
 	devspeed=0
@@ -81,6 +82,7 @@ function draw_game()
 	--spr(140,112,32,2,2) -- mogyoro
 	--spr(64,16,16,4,4)   -- elefant
 	draw_assist_view()
+	draw_carpet()
 	draw_wall()
 	draw_bwall()
 	draw_mhc()
@@ -114,6 +116,7 @@ function draw_game()
 	if current_lvl==1 and loaded() then tb_draw() end 
 		
 	if not loaded() then
+		
 		print_current_map_number()
 		load_anim(anim_timer)
 	end
@@ -144,9 +147,14 @@ function switch_level(lvl)
 	load_game_lvl(lvl)
 end
 
+
 function print_current_map_number()
-	rectfill(40,40,100,100,0)
-	obprint("room"..current_lvl,40,40,7,0,2)
+	rectfill(32,48,96,64,1)
+	if(current_lvl<10) then
+		obprint("room"..current_lvl,45,52,7,0,2)
+	else
+		obprint("room"..current_lvl,42,52,7,0,2)
+	end
 end
 
 function next_level()

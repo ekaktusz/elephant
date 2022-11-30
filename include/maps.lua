@@ -1,7 +1,9 @@
 --map
 n_lvls=28
 sprite_nums={
+	carpet=234,
 	wall=128,
+	bath_wall=204,
 	bwall=160,
 	bdwall=130,
 	mhc=196,
@@ -47,7 +49,8 @@ sprite_nums={
 	lamp=46
 }
 
-lvl_tmplt = { --lvl 1
+lvl_tmplt={}
+lvl_tmplt= {
 	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
 	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
 	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},

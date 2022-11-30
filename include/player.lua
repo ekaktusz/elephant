@@ -77,14 +77,16 @@ end
 
 function pcan_move(d)
 	--d: direction 'l' 'r' 'u' 'd'
-	if  is_end_of_map(p.tx,p.ty,d) or 
-		   is_tile_on_side(p.tx,p.ty,sprite_nums.elephant1,d) or
-		   is_tile_on_side(p.tx,p.ty,sprite_nums.water1,d) or
-		   is_tile_on_side(p.tx,p.ty,sprite_nums.wall,d) or
-		   is_tile_on_side(p.tx,p.ty,sprite_nums.bwall,d) or
-		   is_tile_on_side(p.tx,p.ty,sprite_nums.mhc,d) or
-		   (is_tile_on_side(p.tx,p.ty,sprite_nums.vhole,d) and (d=='r' or d=='l')) or
-		   (is_tile_on_side(p.tx,p.ty,sprite_nums.hhole,d) and (d=='u' or d=='d'))
+	local _x=p.tx
+	local _y=p.ty
+	if  is_end_of_map(_x,_y,d) or 
+		   is_tile_on_side(_x,_y,sprite_nums.elephant1,d) or
+		   is_tile_on_side(_x,_y,sprite_nums.water1,d) or
+		   is_tile_on_side(_x,_y,sprite_nums.wall,d) or
+		   is_tile_on_side(_x,_y,sprite_nums.bwall,d) or
+		   is_tile_on_side(_x,_y,sprite_nums.mhc,d) or
+		   (is_tile_on_side(_x,_y,sprite_nums.vhole,d) and (d=='r' or d=='l')) or
+		   (is_tile_on_side(_x,_y,sprite_nums.hhole,d) and (d=='u' or d=='d'))
 		then
 		return false
 	end

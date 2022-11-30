@@ -1,9 +1,7 @@
 --elephant
 function make_elephant()
 	e={
-		sprite=64,
-		idle_sprite=64,
-		scared_sprite=72,
+		sprite=sprite_nums.elephant1,
 		x=16,
 		y=16,
 		tx=get_tx(sprite_nums.elephant1),
@@ -36,7 +34,10 @@ function make_elephant()
 		scared=false,
 		scared_time=20,
 		scared_timer=0,
-		scared_anim_played=false,
+		scared_anim_played_up=false,
+		scared_anim_played_down=false,
+		scared_anim_played_left=false,
+		scared_anim_played_right=false
 	}
 	e.x=(e.tx-1)*16
 	e.y=(e.ty-1)*16
@@ -56,68 +57,42 @@ function draw_elephant()
 
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.last_horizontal_dir=='l',false)
 
-	draw_eyes()
+	if not e.scared then draw_eyes() end
 end
 
 function draw_eyes()
---reset things to normal
-	--poke(0x5f54,0)
-	 --szem
-	--if e.seen_player then
-	--	if (e.d==1) then
-	--		if (e.f==0 ) then
-	--			rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
-	--			rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
-	--		else 
-	--			rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
-	--			rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
-	--		end
-	--	elseif (e.d==2) then
-	--		if (e.f==0 ) then
-	--			rectfill(e.x+4,e.y+8,e.x+7,e.y+11,7) --szemfeherje
-	--			rectfill(e.x+4,e.y+10,e.x+5,e.y+11,1) --pupilla
-	--			
-	--		else 
-	--			rectfill(e.x+4,e.y+9,e.x+7,e.y+12,7) --szemfeherje
-	--			rectfill(e.x+4,e.y+11,e.x+5,e.y+12,1) --pupilla
-	--	end
-	--	elseif (e.d==3) then
---
-	--	elseif (e.d==4) then
---
-	--	end	
-	--end
-	
-	if (e.d==1 or e.d==3 or e.d==4 or e.d==0) then
-		if (e.f==0 ) then
-			rectfill(e.x+24,e.y+8,e.x+27,e.y+11,7) --szemfeherje
-			rectfill(e.x+26,e.y+10,e.x+27,e.y+11,1) --pupilla
+	local _x=e.x
+	local _y=e.y
+	if e.last_horizontal_dir=='r' then
+		if e.f==0 then
+			rectfill( _x+24, _y+8, _x+27, _y+11,7) --szemfeherje
+			rectfill( _x+26, _y+10, _x+27, _y+11,1) --pupilla
 			if(e.eyes_closed) then
-				rectfill(e.x+24,e.y+6,e.x+27,e.y+11,6)
-				rectfill(e.x+24,e.y+11,e.x+27,e.y+11,5)
+				rectfill( _x+24, _y+6, _x+27, _y+11,6)
+				rectfill( _x+24, _y+11, _x+27, _y+11,5)
 			end
 		else 
-			rectfill(e.x+24,e.y+9,e.x+27,e.y+12,7)
-			rectfill(e.x+26,e.y+11,e.x+27,e.y+12,1)
+			rectfill( _x+24, _y+9, _x+27, _y+12,7)
+			rectfill( _x+26, _y+11, _x+27, _y+12,1)
 			if(e.eyes_closed) then
-				rectfill(e.x+24,e.y+7,e.x+27,e.y+12,6)
-				rectfill(e.x+24,e.y+12,e.x+27,e.y+12,5)
+				rectfill( _x+24, _y+7, _x+27, _y+12,6)
+				rectfill( _x+24, _y+12, _x+27, _y+12,5)
 			end
 		end
-	elseif (e.d==2) then
+	else
 		if (e.f==0 ) then
-			rectfill(e.x+4,e.y+8,e.x+7,e.y+11,7) --szemfeherje
-			rectfill(e.x+4,e.y+10,e.x+5,e.y+11,1) --pupilla
+			rectfill( _x+4, _y+8, _x+7, _y+11,7) --szemfeherje
+			rectfill( _x+4, _y+10, _x+5, _y+11,1) --pupilla
 			if(e.eyes_closed) then
-				rectfill(e.x+4,e.y+6,e.x+7,e.y+11,6)
-				rectfill(e.x+4,e.y+11,e.x+7,e.y+11,5)
+				rectfill( _x+4, _y+6, _x+7, _y+11,6)
+				rectfill( _x+4, _y+11, _x+7, _y+11,5)
 			end
 		else 
-			rectfill(e.x+4,e.y+9,e.x+7,e.y+12,7) --szemfeherje
-			rectfill(e.x+4,e.y+11,e.x+5,e.y+12,1) --pupilla
+			rectfill( _x+4, _y+9, _x+7, _y+12,7) --szemfeherje
+			rectfill( _x+4, _y+11, _x+5, _y+12,1) --pupilla
 			if(e.eyes_closed) then
-				rectfill(e.x+4,e.y+7,e.x+7,e.y+12,6) --szürkítés
-				rectfill(e.x+4,e.y+12,e.x+7,e.y+12,5) --also vonal
+				rectfill( _x+4, _y+7, _x+7, _y+12,6) --szürkítés
+				rectfill( _x+4, _y+12, _x+7, _y+12,5) --also vonal
 			end
 		end
 	end
@@ -170,14 +145,14 @@ function update_elephant_d()
 					if (e.tx>n.tx) then
 						--elefant mogott
 						e.should_move=true
-						e.d=2
+						e.d='l'
 						e.last_horizontal_dir='l'
 					end
 					if (e.tx<n.tx) then
 						--elefant elott
 						e.ntx=e.tx-1
 						e.should_move=true
-						e.d=1
+						e.d='r'
 						e.last_horizontal_dir='r'
 					end
 				end
@@ -187,12 +162,12 @@ function update_elephant_d()
 					if (e.ty>n.ty) then
 						--elefant felett
 						e.should_move=true
-						e.d=3
+						e.d='u'
 					end
 					if (e.ty<n.ty) then
 						--elefant alatt
 						e.should_move=true
-						e.d=4
+						e.d='d'
 					end
 				end
 			end
@@ -205,13 +180,13 @@ function update_elephant_d()
 			if (e.tx>p.tx) then
 				--elefant mogott
 				e.seen_player=true
-				e.d=1
+				e.d='r'
 				e.last_horizontal_dir='r'
 			end
 			if (e.tx<p.tx) then
 				--elefant elott
 				e.seen_player=true
-				e.d=2
+				e.d='l'
 				e.last_horizontal_dir='l'
 			end
 		end
@@ -221,22 +196,22 @@ function update_elephant_d()
 			if (e.ty>p.ty) then
 				--elefant felett
 				e.seen_player=true
-				e.d=4
+				e.d='d'
 			end
 			if (e.ty<p.ty) then
 				--elefant alatt
 				e.seen_player=true
-				e.d=3
+				e.d='u'
 			end
 		end
 	end
 end
 
 function ecollide_with_d()
-	if (e.d==1 and d.d=='r' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'r')) or
-	   (e.d==2 and d.d=='l' and is_tile_on_side(e.tx+1,e.ty,sprite_nums.vdoor,'l')) or
-	   (e.d==3 and d.d=='u' and is_tile_on_side(e.tx,e.ty+1,sprite_nums.vdoor,'u')) or
-	   (e.d==4 and d.d=='d' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'d'))
+	if (e.d=='r' and d.d=='r' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'r')) or
+	   (e.d=='l' and d.d=='l' and is_tile_on_side(e.tx+1,e.ty,sprite_nums.vdoor,'l')) or
+	   (e.d=='u' and d.d=='u' and is_tile_on_side(e.tx,e.ty+1,sprite_nums.vdoor,'u')) or
+	   (e.d=='d' and d.d=='d' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'d'))
 	then		
 		e.finish=true
 	end
@@ -253,7 +228,7 @@ function update_elephant()
 		else
 			e.scared=false
 			e.scared_timer=0
-			e.sprite=e.idle_sprite
+			e.sprite=sprite_nums.elephant1
 		end
 		return
 	end
@@ -305,64 +280,71 @@ function update_elephant()
 	
 end
 
+function update_scare(d,scared_anim_b)
+    if e.d==d and ecan_move(d) and e.seen_player and not scared_anim_b then
+		sfx(7)
+		e.scared=true
+		scared_anim_b=true --addig tru amig falhoz nem ér
+		e.sprite=sprite_nums.scelephant1
+	end
+	if scared_anim_b and e.d==d and not ecan_move(d) then
+		scared_anim_b=false --ujra meg tud ijedni?
+	end
+	return scared_anim_b
+end
+
 function move_elephant()
 
 	e.anim_speed=10
 	if (e.seen_player) then
-		if (e.d==1 and not ecan_move('r')) or
-		   (e.d==2 and not ecan_move('l')) or
-		   (e.d==3 and not ecan_move('u')) or
-		   (e.d==4 and not ecan_move('d'))
+		if (e.d=='r' and not ecan_move('r')) or
+		   (e.d=='l' and not ecan_move('l')) or
+		   (e.d=='u' and not ecan_move('u')) or
+		   (e.d=='d' and not ecan_move('d'))
 		then
 			e.seen_player=false
 		end
 	end
 	
 	if (e.finish) then
-		if (e.d==1) then
+		if (e.d=='r') then
 			spawntrail(e.x,e.y+32,2,2,5,6,epart)
 			e.x+=e.spd
-		elseif (e.d==2) then
+		elseif (e.d=='l') then
 			spawntrail(e.x+32,e.y+32,2,2,5,6,epart)
 			e.x-=e.spd
-		elseif (e.d==3) then
+		elseif (e.d=='u') then
 			spawntrail(e.x+16,e.y+32,8,8,5,6,epart)
 			e.y-=e.spd
-		elseif (e.d==4) then
+		elseif (e.d=='d') then
 			spawntrail(e.x+16,e.y,8,8,5,6,epart)
 			e.y+=e.spd
 		end
 		return
 	end
-	--megijedt jobbiranyba
-	if ( (e.d==1) and ecan_move('r')) -- or (e.d==2) and ecan_move('l') or (e.d==3) and ecan_move('u') or (e.d==4) and ecan_move('d') )
-		 and e.seen_player and not e.scared_anim_played then
-		sfx(7)
-		log('wtf')
-		e.scared=true
-		e.scared_anim_played=true --addig tru amig falhoz nem ér
-		e.sprite=e.scared_sprite
-	end
-	if e.scared_anim_played and (e.d==1) and not ecan_move('r') then --or (e.d==2) and not ecan_move('l') or (e.d==3) and not ecan_move('u') or (e.d==4) and not ecan_move('d') then
-		e.scared_anim_played=false --ujra meg tud ijedni?
-	end
+	
+	e.scared_anim_played_left=update_scare('l',e.scared_anim_played_left)
+	e.scared_anim_played_right=update_scare('r',e.scared_anim_played_right)
+	e.scared_anim_played_up=update_scare('u',e.scared_anim_played_up)
+	e.scared_anim_played_down=update_scare('d',e.scared_anim_played_down)
 
-	if (e.d==1) and ecan_move('r') and (e.should_move or e.seen_player)
+
+	if (e.d=='r') and ecan_move('r') and (e.should_move or e.seen_player)
 		then --jobbra
 		spawntrail(e.x,e.y+32,2,2,5,6,epart)
 		e.x+=e.spd
 		e.anim_speed=5
-	elseif (e.d==2) and ecan_move('l') and (e.should_move or e.seen_player)
+	elseif (e.d=='l') and ecan_move('l') and (e.should_move or e.seen_player)
 		then --balra
 			spawntrail(e.x+32,e.y+32,2,2,5,6,epart)
 		e.x-=e.spd
 		e.anim_speed=5
-	elseif (e.d==3) and ecan_move('u') and (e.should_move or e.seen_player)
+	elseif (e.d=='u') and ecan_move('u') and (e.should_move or e.seen_player)
 		then --fel
 			spawntrail(e.x+16,e.y+32,8,8,5,6,epart)
 		e.y-=e.spd
 		e.anim_speed=5
-	elseif (e.d==4) and ecan_move('d') and (e.should_move or e.seen_player)
+	elseif (e.d=='d') and ecan_move('d') and (e.should_move or e.seen_player)
 		then --le
 			spawntrail(e.x+16,e.y,8,8,5,6,epart)
 		e.y+=e.spd
