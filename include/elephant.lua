@@ -34,7 +34,7 @@ function make_elephant()
 		vegtelen=0,
 		ending_sound_played=false,
 		scared=false,
-		scared_time=40,
+		scared_time=20,
 		scared_timer=0,
 		scared_anim_played=false,
 	}
