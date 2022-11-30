@@ -14,10 +14,12 @@ function tb_init(voice,string) -- this function starts and defines a text box.
     col1=0, -- background color
     col2=7, -- border color
     col3=7, -- text color
+    time=500 -- until its dismissed automatically
     }
 end
 
 function tb_update()  -- this function handles the text box on every frame update.
+    tb.time-=1
     if tb.char<#tb.str[tb.i] then -- if the message has not been processed until it's last character:
         tb.cur+=0.8 -- increase the buffer. 0.5 is already max speed for this setup. if you want messages to show slower, set this to a lower number. this should not be lower than 0.1 and also should not be higher than 0.9
         if tb.cur>0.9 then -- if the buffer is larger than 0.9:
@@ -34,6 +36,9 @@ function tb_update()  -- this function handles the text box on every frame updat
         else -- if there are no more messages to display:
             reading=false -- set reading to false. this makes sure the text box isn't drawn on screen and can be used to resume normal gameplay.
         end
+    end
+    if (tb.time<0) then
+        reading=false
     end
 end
 
