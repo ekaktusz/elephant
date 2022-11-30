@@ -6,7 +6,7 @@ function init_menu()
 	clvl=1
 	_update = update_menu
 	_draw = draw_menu
-	--music(0)
+	music(0)
 	make_lvl_slclts()
 	anim_timer2=92
 	select_timer=120
