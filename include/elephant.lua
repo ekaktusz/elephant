@@ -48,6 +48,11 @@ end
 
 function draw_elephant()
 
+	if (e.scared) then 
+		e.step=0
+		e.anim_speed=20 
+	end
+
 	--palette shift everything a shade darker
 	if not e.hit_freeze then
 		e.stp+=1
@@ -296,6 +301,7 @@ end
 function move_elephant()
 
 	e.anim_speed=10
+
 	if (e.seen_player) then
 		if (e.d=='r' and not ecan_move('r')) or
 		   (e.d=='l' and not ecan_move('l')) or

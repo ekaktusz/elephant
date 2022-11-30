@@ -72,7 +72,10 @@ function can_see_through_x(tx1,tx2,ty)
 		or gamemap[ty][i]==sprite_nums.green1
 		or gamemap[ty][i]==sprite_nums.green2
 		or gamemap[ty][i]==sprite_nums.pink1
-		or gamemap[ty][i]==sprite_nums.pink2  then
+		or gamemap[ty][i]==sprite_nums.pink2
+		or gamemap[ty][i]==sprite_nums.box
+		or gamemap[ty][i]==sprite_nums.lamp
+		or gamemap[ty][i]==sprite_nums.bath_wall then
 			return false
 		end
 	end
@@ -94,7 +97,10 @@ function can_see_through_y(ty1,ty2,tx)
 		or gamemap[i][tx]==sprite_nums.green1
 		or gamemap[i][tx]==sprite_nums.green2
 		or gamemap[i][tx]==sprite_nums.pink1
-		or gamemap[i][tx]==sprite_nums.pink2 then
+		or gamemap[i][tx]==sprite_nums.pink2
+		or gamemap[i][tx]==sprite_nums.box
+		or gamemap[i][tx]==sprite_nums.lamp
+		or gamemap[i][tx]==sprite_nums.bath_wall then
 			return false
 		end
 	end
