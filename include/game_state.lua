@@ -26,6 +26,7 @@ function load_game_lvl(lvl)
 	game_anim_speed=5
 	game_over=false
 	game_over_timer=60
+	assisted_view=false
 	tb_init(0,{"the elephants are afraid of \nmice. this textbox could help \nthe player with the puzzles"})
 end
 
@@ -64,6 +65,10 @@ function update_game()
 		end
 	end
 
+	if (btnp(0,1)) then
+		assisted_view=not assisted_view
+	end
+
 	if current_lvl==1 then tb_update() end
 	
 	updateparts(part)
@@ -75,7 +80,7 @@ function draw_game()
 	draw_map()
 	--spr(140,112,32,2,2) -- mogyoro
 	--spr(64,16,16,4,4)   -- elefant
-	shade_seen_tiles()
+	draw_assist_view()
 	draw_wall()
 	draw_bwall()
 	draw_mhc()
@@ -104,7 +109,7 @@ function draw_game()
 
 	--shade_unseen_tiles()
 
-	--shade_seen_tiles()
+	--draw_assist_view()
 
 	if current_lvl==1 then tb_draw() end 
 		

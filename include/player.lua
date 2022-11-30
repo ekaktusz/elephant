@@ -157,3 +157,28 @@ function move_player()
  	end
 	end
 end
+
+function can_elephant_see_the_player()
+	-- is in line with player
+	if(e.ty==p.ty) or (e.ty+1==p.ty) then
+		if (can_see_through_x(p.tx,e.tx,p.ty)) then
+			if (e.tx>p.tx) then
+				return true
+			end
+			if (e.tx<p.tx) then
+				return true
+			end
+		end
+	end
+	if(e.tx==p.tx) or (e.tx+1==p.tx) then
+		if (can_see_through_y(p.ty,e.ty,p.tx)) then
+			if (e.ty>p.ty) then
+				return true
+			end
+			if (e.ty<p.ty) then
+				return true
+			end
+		end
+	end
+	return false
+end
