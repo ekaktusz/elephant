@@ -57,6 +57,8 @@ light_rigids={
 	sprite_nums.bwall,
 	sprite_nums.hhole,
 	sprite_nums.vhole,
+	sprite_nums.whhole,
+	sprite_nums.hhole,
 	sprite_nums.plant,
 	sprite_nums.wc,
 	sprite_nums.old_tv,

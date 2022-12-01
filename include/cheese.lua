@@ -2,6 +2,8 @@
 function make_cheeses()
     cheeses=get_all_tile_pos(sprite_nums.cheese)
     eaten_cheeses={}
+    semi_finish=false
+    semi_finish_timer=100
 end
 
 function pcollide_with_cheese(c)
@@ -13,7 +15,7 @@ function pcollide_with_cheese(c)
         sfx(8)
         p.cheese_eat_time=50
         if current_lvl==n_lvls and #cheeses==0 then
-            finished=true
+            semi_finish=true
         end
     end
 end

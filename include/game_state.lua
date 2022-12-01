@@ -131,7 +131,19 @@ function draw_game()
 	if finished then
 		load_anim(finish_anim_timer)
 	end
+
+	if semi_finish then
+		semi_finish_timer-=1
+		rectfill(32,48,96,64,1)
+		obprint("your winner",42,52,7,0,2)
+	end
+
+	if semi_finish_timer < 0 then
+		finished=true
+	end
 	doshake()
+	print(e.should_move,0)
+	
 end
 
 function load_anim(size,icx,icy)

@@ -5,22 +5,22 @@ function make_door()
 		d='r' --direction
 	}
 	--door direction
-	if (current_lvl==n_lvls) then
+	if current_lvl==n_lvls then
 		return
 	end
 	tmp=get_all_tile_pos(sprite_nums.vdoor)
 	tty=tmp[2].ty
 	ttx=tmp[2].tx
-	if (tty==d.ty) then
+	if tty==d.ty then
 		--horizontal
 		d.sprt=sprite_nums.hdoor
-		if (tty==1) then d.d='u' end
-		if (tty==8) then d.d='d' end
+		if tty==1 then d.d='u' end
+		if tty==8 then d.d='d' end
 	end
-	if (ttx==d.tx) then
+	if ttx==d.tx then
 		--vertical
-		if (ttx==1) then d.d='l' end
-		if (ttx==8) then d.d='r' end
+		if ttx==1 then d.d='l' end
+		if ttx==8 then d.d='r' end
 	end
 end
 

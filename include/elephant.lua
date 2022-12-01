@@ -85,7 +85,7 @@ function draw_eyes()
 			end
 		end
 	else
-		if (e.f==0 ) then
+		if e.f==0 then
 			rectfill( _x+4, _y+8, _x+7, _y+11,7) --szemfeherje
 			rectfill( _x+4, _y+10, _x+5, _y+11,1) --pupilla
 			if e.eyes_closed  then
@@ -106,7 +106,7 @@ end
 function update_elephant_d()
 
 	frame_counter+=1
-	if (frame_counter%120<=5) then
+	if frame_counter%120<=5 then
 		e.eyes_closed=true
 	else
 		e.eyes_closed=false
@@ -125,18 +125,18 @@ function update_elephant_d()
 		return
 	end
 
-	if (not e.seen_player) then
+	if not e.seen_player then
 		-- is in line with nut
 		for _, n in ipairs(nuts) do
 			if e.ty==n.ty or e.ty+1==n.ty then
-				if (can_see_through_x(n.tx,e.tx,n.ty)) then
-					if (e.tx>n.tx) then
+				if can_see_through_x(n.tx,e.tx,n.ty) then
+					if e.tx>n.tx then
 						--elefant mogott
 						e.should_move=true
 						e.d='l'
 						e.last_horizontal_dir='l'
 					end
-					if (e.tx<n.tx) then
+					if e.tx<n.tx then
 						--elefant elott
 						e.ntx=e.tx-1
 						e.should_move=true
@@ -145,14 +145,14 @@ function update_elephant_d()
 					end
 				end
 			end
-			if(e.tx==n.tx) or (e.tx+1==n.tx) then
+			if e.tx==n.tx or e.tx+1==n.tx then
 				if (can_see_through_y(n.ty,e.ty,n.tx)) then
-					if (e.ty>n.ty) then
+					if e.ty>n.ty then
 						--elefant felett
 						e.should_move=true
 						e.d='u'
 					end
-					if (e.ty<n.ty) then
+					if e.ty<n.ty then
 						--elefant alatt
 						e.should_move=true
 						e.d='d'
@@ -162,14 +162,14 @@ function update_elephant_d()
 		end
 	end
 
-	if (current_lvl==n_lvls) then
+	if current_lvl==n_lvls then
 		return
 	end
 
 	-- is in line with player
 	if(e.ty==p.ty) or (e.ty+1==p.ty) then
 		if (can_see_through_x(p.tx,e.tx,p.ty)) then
-			if (e.tx>p.tx) then
+			if e.tx>p.tx then
 				--elefant mogott
 				e.seen_player=true
 				e.d='r'
@@ -219,6 +219,7 @@ function update_elephant()
 	ecollide_with_objects(traps, ecollide_with_trap)
 
 	if e.hit_freeze then
+		e.should_move=false
 		--wait 10 frame
 		if (e.last_horizontal_dir=='r') then
 			spawnpukk(e.x+24,e.y+24,0,0,e.current_c.col1,e.current_c.col2,part)
