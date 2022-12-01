@@ -142,7 +142,6 @@ function draw_game()
 		finished=true
 	end
 	doshake()
-	print(e.should_move,0)
 	
 end
 
