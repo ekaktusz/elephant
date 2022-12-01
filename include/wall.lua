@@ -38,7 +38,7 @@ function draw_bwall()
 	draw_objects(bdwalls)
 end
 
-function ecollide_with_bwall()
+function ecollide_with_bwall(bw)
 	shake+=0.1
 	devspeed+=0.01
 	e.wall_break_time=20
