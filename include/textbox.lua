@@ -14,7 +14,7 @@ function tb_init(voice,string) -- this function starts and defines a text box.
         col1=0, -- background color
         col2=7, -- border color
         col3=7, -- text color
-        time=500 -- until its dismissed automatically
+        time=250 -- until its dismissed automatically
     }
 end
 

@@ -1,21 +1,21 @@
 -- helps for n_lvls
 
 help_texts={
-    "Elephants are afraid of mice. Chase her through the door,to help you escape.",
-    "The elephant is hungry, she \nwill go for her food. But only \nif she feels safe! Take cover!",
-    "Pick up the peanut with ❎",
-    "Feed & hide! Press 's' to toggle the elephant's line of sight",
-    "Help her get them peanuts. Press 🅾️ to retry.",
-    "Press the button and let the elephant out of her cage.",
-    "The elephant will destroy some blocks when frightened. But you can hide behind them.",
+    "elephants are afraid of mice. \nchase her through the door \nto help you escape.",
+    "the elephant is hungry, she \nwill go for her food. but only \nif she feels safe! take cover!",
+    "\n  pick up the peanut with ❎",
+    "feed and hide! \npress 's' to toggle the \nelephant's line of sight",
+    "help her get them peanuts! \npress 🅾️  or 'c' to retry.",
+    "press the button to let the \nelephant out of her cage.",
+    "the elephant will destroy some \nblocks when frightened. \nbut you can hide behind them.",
     "",
     "",
     "", --10
-    "Elephants drink 80 liters of water daily. She can handle this mess for you.", 
+    "elephants drink 75 liters of \nwater daily. she can handle \nthis mess for you.", 
     "",
     "",
-    "The mouse traps will catch you, but they are no match for the elephant. ",
-    "She can see you over the traps however.",
+    "the mouse traps will catch you, \nbut they are no match for the \nelephant... ",
+    "however she can see you \nover the traps.",
     "",
     "",
     "",
@@ -27,6 +27,7 @@ help_texts={
     "",
     "",
     "",
+	"",
     "",
-    ""
+    "welcome to the warehouse! \nthanks for playing with us!", --29
 }
