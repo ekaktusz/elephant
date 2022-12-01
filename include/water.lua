@@ -20,14 +20,8 @@ function draw_water()
 	end
 end
 
-function draw_dwater()
-	for _, dw in ipairs(dwater) do
-		spr(dwtrsprite,(dw.tx-1)*16,(dw.ty-1)*16,2,2)
-	end
-end
-
 function ecollide_with_water(w)
-	dwater[#dwater+1] = {tx=w.tx, ty=w.ty} -- add to deleted waters
+	dwater[#dwater+1] = {tx=w.tx, ty=w.ty, sprt=sprite_nums.dwater} -- add to deleted waters
 	del(water,w)
 	--e.d=0
 	e.current_c=e.w_drink_c

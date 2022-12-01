@@ -105,31 +105,11 @@ end
 
 function update_elephant_d()
 
-	ecollide_with_objects(nuts, ecollide_with_nut)
-	ecollide_with_objects(water, ecollide_with_water)
-	ecollide_with_objects(traps, ecollide_with_trap)
-
 	frame_counter+=1
 	if (frame_counter%120<=5) then
 		e.eyes_closed=true
 	else
 		e.eyes_closed=false
-	end
-
-	if e.hit_freeze then
-		--wait 10 frame
-		if (e.last_horizontal_dir=='r') then
-			spawnpukk(e.x+24,e.y+24,0,0,e.current_c.col1,e.current_c.col2,part)
-		else
-			spawnpukk(e.x+8,e.y+24,0,0,e.current_c.col1,e.current_c.col2,part)
-		end
-		if e.hit_freeze_timer<e.hit_freeze_time then
-			e.hit_freeze_timer+=1
-			return
-		else
-			e.hit_freeze=false
-			e.hit_freeze_timer=0
-		end
 	end
 
 	if e.wall_break_time>0 then
@@ -234,6 +214,25 @@ function update_elephant()
 
 	
 	ecollide_with_objects(bwalls, ecollide_with_bwall)
+	ecollide_with_objects(nuts, ecollide_with_nut)
+	ecollide_with_objects(water, ecollide_with_water)
+	ecollide_with_objects(traps, ecollide_with_trap)
+
+	if e.hit_freeze then
+		--wait 10 frame
+		if (e.last_horizontal_dir=='r') then
+			spawnpukk(e.x+24,e.y+24,0,0,e.current_c.col1,e.current_c.col2,part)
+		else
+			spawnpukk(e.x+8,e.y+24,0,0,e.current_c.col1,e.current_c.col2,part)
+		end
+		if e.hit_freeze_timer<e.hit_freeze_time then
+			e.hit_freeze_timer+=1
+			return
+		else
+			e.hit_freeze=false
+			e.hit_freeze_timer=0
+		end
+	end
 
 	if e.scared then
 		--e.sprite=e.scared_sprite
