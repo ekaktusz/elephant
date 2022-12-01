@@ -29,7 +29,7 @@ function load_game_lvl(lvl)
 	game_over_timer=60
 	assisted_view=false
 	room_text_timer=0
-	tb_init(0,{"the elephants are afraid of \nmice. this textbox could help \nthe player with the puzzles"})
+	tb_init(0,{help_texts[lvl]})
 end
 
 function init_game(lvl)
@@ -115,7 +115,7 @@ function draw_game()
 
 	--draw_assist_view()
 
-	if current_lvl==1 and loaded() then tb_draw() end 
+	if loaded() then tb_draw() end 
 
 	if room_text_timer<40 then
 		print_current_map_number()

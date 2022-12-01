@@ -172,8 +172,11 @@ function is_on_tile(tx,ty,letter)
 	end
 	
 	--hole
-	if (letter==sprite_nums.hhole or letter==sprite_nums.vhole) then
-		return gamemap[ty][tx]==letter
+	if letter==sprite_nums.hhole  then
+		return gamemap[ty][tx]==letter or gamemap[ty][tx]==sprite_nums.whhole
+	end
+	if letter==sprite_nums.vhole then
+		return gamemap[ty][tx]==letter or gamemap[ty][tx]==sprite_nums.wvhole
 	end
 end
 
@@ -195,9 +198,22 @@ function is_tile_on_side(tx,ty,letter,side)
 		stx=tx
 		sty=ty+1 
 	end -- not possible
+
+	--holes
+	if letter==sprite_nums.hhole then
+		if (gamemap[sty][stx]==letter or gamemap[sty][stx]==sprite_nums.whhole) then
+			return true
+		end
+	end
+
+	if letter==sprite_nums.vhole then
+		if (gamemap[sty][stx]==letter or gamemap[sty][stx]==sprite_nums.wvhole) then
+			return true
+		end
+	end
 	
 	-- brick or manholecover
-	if (letter==sprite_nums.mhc or letter==sprite_nums.hhole or letter==sprite_nums.vhole) then 
+	if (letter==sprite_nums.mhc) then 
 		if (gamemap[sty][stx]==letter) then --since it cant be removed
 			return true
 		end
@@ -205,29 +221,17 @@ function is_tile_on_side(tx,ty,letter,side)
 	
 	--wall
 	if (letter==sprite_nums.wall) then 
-		for _, w in ipairs(walls) do
-			if (w.tx==stx and w.ty==sty) then
-				return true
-			end
-		end
+		return is_on_objects(stx, sty, walls)
 	end
 	
 	-- break wall
 	if (letter==sprite_nums.bwall) then 
-		for _, bw in ipairs(bwalls) do
-			if (bw.tx==stx and bw.ty==sty) then
-				return true
-			end
-		end
+		return is_on_objects(stx, sty, bwalls)
 	end
 	
 	-- water
 	if (letter==sprite_nums.water1) then 
-		for _, w in ipairs(water) do
-			if (w.tx==stx and w.ty==sty) then
-				return true
-			end
-		end
+		return is_on_objects(stx, sty, water)
 	end
 	
 	-- elephant
@@ -265,18 +269,12 @@ function is_tile_on_side(tx,ty,letter,side)
 	
 	--grid
 	if (letter==sprite_nums.grid1) then
-		for _, g in ipairs(grids) do
-			if (g.tx==stx and g.ty==sty) then
-			return true
-			end
-		end
+		return is_on_objects(stx, sty, grids)
 	end
 	
 	--button
 	if (letter==sprite_nums.button1) then
-		if (b.tx==stx and b.ty==sty) then
-			return true
-		end
+		return is_on_object(stx, sty, b)
 	end
 	
 	return false

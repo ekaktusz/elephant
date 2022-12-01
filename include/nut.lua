@@ -20,7 +20,7 @@ function draw_eaten_nuts()
 end
 
 function pcollide_with_nut(n)
-	if not p.has_nut then return end
+	if p.has_nut then return end
 	p.has_nut=true
 	del(nuts,n)
 	sfx(6)

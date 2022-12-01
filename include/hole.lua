@@ -10,12 +10,8 @@ function make_h()
 end
 
 function draw_h()
-	for _,h in ipairs(hholes) do
-    	spr(h.sprt,(h.tx-1)*16,(h.ty-1)*16,2,2)
-	end
-	for _,h in ipairs(vholes) do
-    	spr(h.sprt,(h.tx-1)*16,(h.ty-1)*16,2,2)
-	end
+	draw_objects(hholes)
+	draw_objects(vholes)
 end
 
 

@@ -43,7 +43,8 @@ function tb_update()  -- this function handles the text box on every frame updat
 end
 
 function tb_draw() -- this function draws the text box.
-    if reading then -- only draw the text box if reading is true, that is, if a text box has been called and tb_init() has already happened.
+    local _wat = help_texts[current_lvl]==""
+    if reading and not _wat then -- only draw the text box if reading is true, that is, if a text box has been called and tb_init() has already happened.
         rectfill(tb.x,tb.y,tb.x+tb.w,tb.y+tb.h,tb.col1) -- draw the background.
         rect(tb.x,tb.y,tb.x+tb.w,tb.y+tb.h,tb.col2) -- draw the border.
         print(sub(tb.str[tb.i],1,tb.char),tb.x+2,tb.y+2,tb.col3) -- draw the text.
