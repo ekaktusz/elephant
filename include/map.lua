@@ -3,7 +3,10 @@ function draw_tile(tx,ty)
 end
 
 function draw_map_edge()
-	local _col=4
+	--for i=0,15 do
+	--	pal(i,i+128,2)
+	--end
+	--poke(0x5f5f,0x10)
 	rectfill(0,0,128,1,_col)--fent
 	rectfill(0,126,128,128,_col)--lent
 	rectfill(0,0,1,128,_col)--bal
@@ -56,26 +59,22 @@ function get_ty(_sprnum)
 	return 0
 end
 
+local function has_value (tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end
+
 -- ty az y pozicio, a sor amiben vagunk, a tx1, tx2 peddig a két tile
 function can_see_through_x(tx1,tx2,ty)
 	local x1=min(tx1,tx2)
 	local x2=max(tx1,tx2)
 	for i=x1,x2 do
-		if gamemap[ty][i]==sprite_nums.wall
-		or gamemap[ty][i]==sprite_nums.bwall
-		or gamemap[ty][i]==sprite_nums.hhole
-		or gamemap[ty][i]==sprite_nums.vhole
-		or gamemap[ty][i]==sprite_nums.plant
-		or gamemap[ty][i]==sprite_nums.wc
-		or gamemap[ty][i]==sprite_nums.old_tv
-		or gamemap[ty][i]==sprite_nums.new_tv
-		or gamemap[ty][i]==sprite_nums.green1
-		or gamemap[ty][i]==sprite_nums.green2
-		or gamemap[ty][i]==sprite_nums.pink1
-		or gamemap[ty][i]==sprite_nums.pink2
-		or gamemap[ty][i]==sprite_nums.box
-		or gamemap[ty][i]==sprite_nums.lamp
-		or gamemap[ty][i]==sprite_nums.bath_wall then
+		if has_value(light_rigids,gamemap[ty][i]) then
 			return false
 		end
 	end
@@ -86,21 +85,7 @@ function can_see_through_y(ty1,ty2,tx)
 	local y1=min(ty1,ty2)
 	local y2=max(ty1,ty2)
 	for i=y1,y2 do
-		if gamemap[i][tx]==sprite_nums.wall
-		or gamemap[i][tx]==sprite_nums.bwall
-		or gamemap[i][tx]==sprite_nums.hhole
-		or gamemap[i][tx]==sprite_nums.vhole
-		or gamemap[i][tx]==sprite_nums.plant
-		or gamemap[i][tx]==sprite_nums.wc
-		or gamemap[i][tx]==sprite_nums.old_tv
-		or gamemap[i][tx]==sprite_nums.new_tv
-		or gamemap[i][tx]==sprite_nums.green1
-		or gamemap[i][tx]==sprite_nums.green2
-		or gamemap[i][tx]==sprite_nums.pink1
-		or gamemap[i][tx]==sprite_nums.pink2
-		or gamemap[i][tx]==sprite_nums.box
-		or gamemap[i][tx]==sprite_nums.lamp
-		or gamemap[i][tx]==sprite_nums.bath_wall then
+		if has_value(light_rigids,gamemap[i][tx]) then
 			return false
 		end
 	end
@@ -140,6 +125,14 @@ function is_on_tile(tx,ty,letter)
 			end
 		end
 		return false
+	end
+	--door
+	if letter==sprite_nums.vdoor then
+		if (d.d=='l' or d.d=='r') then
+			return tx==d.tx and (ty==d.ty or ty==d.ty+1)
+		else
+			return ty==d.ty and (tx==d.tx or tx==d.tx+1)
+		end
 	end
 	
 	--hole

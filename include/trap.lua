@@ -52,9 +52,9 @@ function draw_deadtrap()
 	if(dead_trap.f>1) then dead_trap.f=0 end
 
     if (game_over_timer > 30) then
-        spr(dead_trap.spr1+dead_trap.f*66,(dead_trap.tx-1)*16,(dead_trap.ty-1)*16,2,2)
+        spr(dead_trap.spr1+dead_trap.f*58,(dead_trap.tx-1)*16,(dead_trap.ty-1)*16,2,2)
     else
-        spr(dead_trap.spr3,(dead_trap.tx-1)*16,(dead_trap.ty-1)*16,2,2)
+        spr(dead_trap.spr2,(dead_trap.tx-1)*16,(dead_trap.ty-1)*16,2,2)
     end
 end
 

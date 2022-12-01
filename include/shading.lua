@@ -39,6 +39,9 @@ function draw_assist_view()
                     else
                         draw_colored_tile(tx,ty,COLORS.LIGHT_GREY,COLORS.DARK_GREEN,COLORS.GREEN,COLORS.DARK_BLUE)
                     end
+                    if (can_elephant_see_the_player() and (p.has_nut or is_on_tile(p.tx,p.ty, sprite_nums.peanut))) then
+                        draw_colored_tile(tx,ty,COLORS.LIGHT_GREY,COLORS.ORANGE,COLORS.YELLOW,COLORS.DARK_BLUE)
+                    end
                 end
             end
         end

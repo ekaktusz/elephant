@@ -22,6 +22,8 @@ sprite_nums={
 	hdoor=208,
 	vhole=162,
 	hhole=172,
+	wvhole=206,
+	whhole=238,
 	cheese=14,
 	water1=132,
 	water2=164,
@@ -47,6 +49,24 @@ sprite_nums={
 	box=228,
 	dbox=230,
 	lamp=46
+}
+
+light_rigids={
+	sprite_nums.wall,
+	sprite_nums.bwall,
+	sprite_nums.hhole,
+	sprite_nums.vhole,
+	sprite_nums.plant,
+	sprite_nums.wc,
+	sprite_nums.old_tv,
+	sprite_nums.new_tv,
+	sprite_nums.green1,
+	sprite_nums.green2,
+	sprite_nums.pink1,
+	sprite_nums.pink2,
+	sprite_nums.box,
+	sprite_nums.lamp,
+	sprite_nums.bath_wall
 }
 
 lvl_tmplt={}

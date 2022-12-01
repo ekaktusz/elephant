@@ -105,6 +105,10 @@ end
 
 function update_elephant_d()
 
+	if (can_elephant_see_the_player() and (p.has_nut or is_on_tile(p.tx,p.ty, sprite_nums.peanut))) then
+		return
+	end
+
 	frame_counter+=1
 	if (frame_counter%120<=5) then
 		e.eyes_closed=true
@@ -276,11 +280,11 @@ function update_elephant()
 	end
 	
 	-- vege ha elefant kier
-	if e.finish and (e.x>128
-		or e.x+32<0 or e.y>128 
-		or e.y+32<0) then
-			finished=true
-	end
+	--if e.finish and (e.x>128
+	--	or e.x+32<0 or e.y>128 
+	--	or e.y+32<0) then
+	--		finished=true
+	--end
 	updateparts(epart)
 	
 end
@@ -299,6 +303,8 @@ function update_scare(d,scared_anim_b)
 end
 
 function move_elephant()
+
+	
 
 	e.anim_speed=10
 
@@ -333,7 +339,6 @@ function move_elephant()
 	e.scared_anim_played_right=update_scare('r',e.scared_anim_played_right)
 	e.scared_anim_played_up=update_scare('u',e.scared_anim_played_up)
 	e.scared_anim_played_down=update_scare('d',e.scared_anim_played_down)
-
 
 	if (e.d=='r') and ecan_move('r') and (e.should_move or e.seen_player)
 		then --jobbra
