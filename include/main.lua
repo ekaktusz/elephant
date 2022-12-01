@@ -1,4 +1,4 @@
 --main
 function _init()
-	init_game(29)
+	init_menu()
 end

@@ -159,9 +159,9 @@ end
 function print_current_map_number()
 	rectfill(32,48,96,64,1)
 	if(current_lvl<10) then
-		obprint("room"..current_lvl,45,52,7,0,2)
+		obprint("room "..current_lvl,42,52,7,0,2)
 	else
-		obprint("room"..current_lvl,42,52,7,0,2)
+		obprint("room "..current_lvl,38,52,7,0,2)
 	end
 end
 
