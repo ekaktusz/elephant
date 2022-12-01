@@ -30,7 +30,7 @@ function draw_map_edge()
 		end
 
 	else
-		draw_other_edges()
+		draw_other_edges('f',_col)
 	end
 end
 

@@ -8,7 +8,7 @@ function tb_init(voice,string) -- this function starts and defines a text box.
         cur=0, -- buffer used to progressively show characters on the text box.
         char=0, -- current character to be drawn on the text box.
         x=0, -- x coordinate
-        y=0, -- y coordginate (106 default)
+        y=5, -- y coordginate (106 default)
         w=127, -- text box width
         h=21, -- text box height
         col1=0, -- background color

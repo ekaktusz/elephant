@@ -1,8 +1,8 @@
 -- helps for n_lvls
 
 help_texts={
-    "Elephants are afraid of mice. Chase her through the door, to help you escape.",
-    "The elephant is hungry, she will go for her food. But only if she feels safe! Take cover!",
+    "Elephants are afraid of mice. Chase her through the door,to help you escape.",
+    "The elephant is hungry, she \nwill go for her food. But only \nif she feels safe! Take cover!",
     "Pick up the peanut with ❎",
     "Feed & hide! Press 's' to toggle the elephant's line of sight",
     "Help her get them peanuts. Press 🅾️ to retry.",
@@ -27,4 +27,6 @@ help_texts={
     "",
     "",
     "",
+    "",
+    ""
 }

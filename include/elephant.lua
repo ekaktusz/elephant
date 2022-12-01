@@ -105,7 +105,6 @@ end
 
 function update_elephant_d()
 
-	
 	ecollide_with_objects(nuts, ecollide_with_nut)
 	ecollide_with_objects(water, ecollide_with_water)
 	ecollide_with_objects(bwalls, ecollide_with_bwall)
@@ -146,7 +145,6 @@ function update_elephant_d()
 	if (can_elephant_see_the_player() and (p.has_nut or is_on_tile(p.tx,p.ty, sprite_nums.peanut))) then
 		return
 	end
-
 
 	if (not e.seen_player) then
 		-- is in line with nut
@@ -230,6 +228,16 @@ end
 
 function update_elephant() 
 
+	if (e.seen_player) then
+		if (e.d=='r' and not ecan_move('r')) or
+		   (e.d=='l' and not ecan_move('l')) or
+		   (e.d=='u' and not ecan_move('u')) or
+		   (e.d=='d' and not ecan_move('d'))
+		then
+			e.seen_player=false
+		end
+	end
+
 	if e.scared then
 		--e.sprite=e.scared_sprite
 		--sfx(7)
@@ -306,19 +314,7 @@ end
 
 function move_elephant()
 
-	
-
 	e.anim_speed=10
-
-	if (e.seen_player) then
-		if (e.d=='r' and not ecan_move('r')) or
-		   (e.d=='l' and not ecan_move('l')) or
-		   (e.d=='u' and not ecan_move('u')) or
-		   (e.d=='d' and not ecan_move('d'))
-		then
-			e.seen_player=false
-		end
-	end
 	
 	if (e.finish) then
 		if (e.d=='r') then

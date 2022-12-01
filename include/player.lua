@@ -40,7 +40,7 @@ function draw_player()
  spr(p.walk[tmp][p.f],p.x,p.y,2,2,p.d==1,p.d==3)
 	--draw nut on player
 	if (p.has_nut) then
-		spr(nsprite,p.x,p.y,2,2)
+		spr(sprite_nums.peanut,p.x,p.y,2,2)
 	end
 end
 
