@@ -19,6 +19,7 @@ function load_game_lvl(lvl)
 	make_mhc()
 	make_h()
 	make_carpet()
+	make_cheeses()
 	shake=0
 	develop=0
 	devspeed=0
@@ -93,6 +94,8 @@ function draw_game()
 	draw_dwater()
 	draw_btraps()
 	drawparts(ppart)
+	draw_objects(cheeses)
+	draw_objects(eaten_cheeses)
 	if not game_over then --ilyenkor a csapda van csak
 		draw_player()
 	end

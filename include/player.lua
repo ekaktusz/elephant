@@ -19,7 +19,8 @@ function make_player()
 		has_nut=false,
 		first_move=false,
 		hit_trap=false,
-		vegtelen=0
+		vegtelen=0,
+		cheese_eat_time=50
 	}
 	p.x=(p.tx-1)*16
 	p.y=(p.ty-1)*16
@@ -62,6 +63,9 @@ function update_player()
 		end
 		press_button()
 		--this is where the button press should be
+	end
+	if (btn(5)) then 
+		pcollide_with_objects(cheeses,pcollide_with_cheese) 
 	end
 	if (btnp(0) or btnp(1) or btnp(2) or btnp(3) or btnp(4)) then
 		p.first_move=true

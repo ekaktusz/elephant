@@ -70,7 +70,6 @@ light_rigids={
 	sprite_nums.bath_wall
 }
 
-lvl_tmplt={}
 lvl_tmplt= {
 	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
 	{'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
