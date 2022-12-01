@@ -18,15 +18,11 @@ function make_traps()
 end
 
 function draw_traps()
-    for _, t in ipairs(traps) do
-    	spr(trap_sprite,(t.tx-1)*16,(t.ty-1)*16,2,2)
-	end
+    draw_objects(traps)
 end
 
 function draw_btraps()
-    for _, bt in ipairs(btraps) do
-    	spr(btrap_sprite,(bt.tx-1)*16,(bt.ty-1)*16,2,2)
-	end
+    draw_objects(btraps)
 end
 
 function update_btraps()
@@ -36,10 +32,6 @@ function update_btraps()
             spawnpukk((bt.tx-1)*16+8,(bt.ty-1)*16+8,0,0,e.current_c.col1,e.current_c.col2,part)
         end
     end
-end
-
-function update_deadtrap()
-    
 end
 
 function draw_deadtrap()
@@ -58,32 +50,23 @@ function draw_deadtrap()
     end
 end
 
-function ecollide_with_trap()
-	for _, t in ipairs(traps) do
-        if (t.tx>=e.tx and t.tx<=e.tx+1) and (t.ty>=e.ty and t.ty<=e.ty+1) then
-            btraps[#btraps+1] = {tx=t.tx, ty=t.ty, dt=destroy_time}
-            del(traps,t)
-            return
- 	    end
-	end
+function ecollide_with_trap(t)
+    btraps[#btraps+1] = {tx=t.tx, ty=t.ty, dt=destroy_time}
+    del(traps,t) 
 end
 
-function pcollide_with_trap()
+function pcollide_with_trap(t)
     if not p.hit_trap then
-        for _, t in ipairs(traps) do
-            if t.tx==p.tx and t.ty==p.ty then
-                p.hit_trap=true
-                if not dead_sound_played then
-                    dead_sound_played=true
-                    sfx(3)
-                    game_over=true
-                    dead_trap.tx=t.tx
-                    dead_trap.ty=t.ty
-                    del(traps,t)
-                end
-                return
-            end
+        p.hit_trap=true
+        if not dead_sound_played then
+            dead_sound_played=true
+            sfx(3)
+            game_over=true
+            dead_trap.tx=t.tx
+            dead_trap.ty=t.ty
+            del(traps,t)
         end
+        return
     end
 end
 

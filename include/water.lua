@@ -26,16 +26,13 @@ function draw_dwater()
 	end
 end
 
-function ecollide_with_water()
-	for _, w in ipairs(water) do
- 	if (w.tx>=e.tx and w.tx<=e.tx+1) and (w.ty>=e.ty and w.ty<=e.ty+1) then
-		dwater[#dwater+1] = {tx=w.tx, ty=w.ty}
- 		del(water,w)
- 		e.d=0
-		e.current_c=e.w_drink_c
- 		e.hit_freeze=true
-		sfx(8)
- 		return
- 	end
-	end
+function ecollide_with_water(w)
+	dwater[#dwater+1] = {tx=w.tx, ty=w.ty} -- add to deleted waters
+	del(water,w)
+	e.d=0
+	e.current_c=e.w_drink_c
+	e.hit_freeze=true
+	sfx(8)
 end
+
+

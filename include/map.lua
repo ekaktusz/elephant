@@ -3,14 +3,50 @@ function draw_tile(tx,ty)
 end
 
 function draw_map_edge()
+	--poke(0x5f5f,0x10)
 	--for i=0,15 do
 	--	pal(i,i+128,2)
 	--end
-	--poke(0x5f5f,0x10)
-	rectfill(0,0,128,1,_col)--fent
-	rectfill(0,126,128,128,_col)--lent
-	rectfill(0,0,1,128,_col)--bal
-	rectfill(126,0,128,128,_col)--jobb
+	--memset(0x5f78,0xff,8)
+	local _x=0
+	local _y=0
+	local _col=1
+	if d then
+		local _x=(d.tx-1)*16
+		local _y=(d.ty-1)*16
+		draw_other_edges(d.d, _col)
+		if d.d=='r' then 
+			rectfill(126,0,127,_y,_col)--jobb
+			rectfill(126,_y+32,127,127,_col)
+		elseif d.d=='l' then
+			rectfill(0,0,1,_y,_col)
+			rectfill(0,_y+32,1,127,_col) 
+		elseif d.d=='u' then
+			rectfill(0,0,_x,1,_col)
+			rectfill(_x+32,0,127,1,_col)
+		elseif d.d=='d' then
+			rectfill(0,126,_x,127,_col)
+			rectfill(_x+32,126,127,127,_col)
+		end
+
+	else
+		draw_other_edges()
+	end
+end
+
+function draw_other_edges(side, _col)
+	local _sides={'l','r','u','d'}
+	del(_sides,side)
+	for s in all(_sides) do
+		draw_edge(s, _col)
+	end
+end
+
+function draw_edge(side, _col)
+	if side=='u' then rectfill(0,0,127,1,_col) end  --fent
+	if side=='d' then rectfill(0,126,127,127,_col) end--lent
+	if side=='l' then rectfill(0,0,1,127,_col) end--bal
+	if side=='r' then rectfill(126,0,127,127,_col) end--jobb
 end
 
 function draw_map()

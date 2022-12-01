@@ -50,7 +50,7 @@ function anim_player()
 end
 
 function update_player()
-	pcollide_with_trap()
+	pcollide_with_objects(traps, pcollide_with_trap)
 	p.vegtelen+=1
 	move_player()
 	if (btnp(5)) then
@@ -58,7 +58,7 @@ function update_player()
 		if p.has_nut then
 			place_nut()
 		else
-			pcollide_with_nut()
+			pcollide_with_objects(nuts,pcollide_with_nut)
 		end
 		press_button()
 		--this is where the button press should be
@@ -98,11 +98,11 @@ end
 function move_player() 
  --if mid-tile...
  if (p.walking and (p.x%tile_size)>0 or (p.y%tile_size)>0) then
-  if (btn(d_op[p.d])) then
-  	p.dx*=-1
-  	p.dy*=-1
-  	p.d=d_op[p.d]
-  end     
+	if (btn(d_op[p.d])) then
+		p.dx*=-1
+		p.dy*=-1
+		p.d=d_op[p.d]
+	end     
  	--...keep 
  	p.x+=p.dx
  	p.y+=p.dy

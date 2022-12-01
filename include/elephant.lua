@@ -115,10 +115,10 @@ function update_elephant_d()
 	else
 		e.eyes_closed=false
 	end
-	ecollide_with_nut()
-	ecollide_with_water()
-	ecollide_with_bwall()
-	ecollide_with_trap()
+	ecollide_with_objects(nuts, ecollide_with_nut)
+	ecollide_with_objects(water, ecollide_with_water)
+	ecollide_with_objects(bwalls, ecollide_with_bwall)
+	ecollide_with_objects(traps, ecollide_with_trap)
 	
 	if e.hit_freeze then
 		--wait 10 frame

@@ -19,31 +19,20 @@ function draw_eaten_nuts()
 	end
 end
 
-function pcollide_with_nut()
-	for _, n in ipairs(nuts) do
-		if n.tx==p.tx and n.ty==p.ty and not p.has_nut then
-			p.has_nut=true
-			del(nuts,n)
-			sfx(6)
-			return
-		end
-	end
+function pcollide_with_nut(n)
+	if not p.has_nut then return end
+	p.has_nut=true
+	del(nuts,n)
+	sfx(6)
 end
 
-function ecollide_with_nut()
-	for _, n in ipairs(nuts) do
- 	if (n.tx>=e.tx and n.tx<=e.tx+1)
- 	 and (n.ty>=e.ty and n.ty<=e.ty+1)
- 	 then
-		enuts[#enuts+1] = {tx=n.tx, ty=n.ty}
-		del(nuts,n)
-		e.d=0
-		e.hit_freeze=true
-		e.current_c=e.nut_eat_c
-		sfx(1)
- 		return
- 	end
-	end
+function ecollide_with_nut(n)
+	enuts[#enuts+1] = {tx=n.tx, ty=n.ty}
+	del(nuts,n)
+	e.d=0
+	e.hit_freeze=true
+	e.current_c=e.nut_eat_c
+	sfx(1)
 end
 
 function place_nut()

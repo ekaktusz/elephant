@@ -84,10 +84,10 @@ function draw_game()
 	--spr(140,112,32,2,2) -- mogyoro
 	--spr(64,16,16,4,4)   -- elefant
 	draw_assist_view()
-	draw_carpet()
-	draw_wall()
+	draw_object(carpet)
+	draw_objects(walls)
 	draw_bwall()
-	draw_mhc()
+	draw_objects(mhcs)
 	draw_button()
 	draw_eaten_nuts()
 	draw_dwater()
