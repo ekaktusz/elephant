@@ -48,7 +48,7 @@ end
 
 function draw_elephant()
 
-	if (e.scared) then 
+	if e.scared then 
 		e.step=0
 		e.anim_speed=20 
 	end
@@ -56,8 +56,8 @@ function draw_elephant()
 	--palette shift everything a shade darker
 	if not e.hit_freeze then
 		e.stp+=1
-		if(e.stp%e.anim_speed==0) then e.f+=1 end
-		if(e.f>1) then e.f=0 end
+		if e.stp%e.anim_speed==0 then e.f+=1 end
+		if e.f>1 then e.f=0 end
 	end
 
 	spr(e.sprite+e.f*4,e.x,e.y,4,4,e.last_horizontal_dir=='l',false)
@@ -72,14 +72,14 @@ function draw_eyes()
 		if e.f==0 then
 			rectfill( _x+24, _y+8, _x+27, _y+11,7) --szemfeherje
 			rectfill( _x+26, _y+10, _x+27, _y+11,1) --pupilla
-			if(e.eyes_closed) then
+			if e.eyes_closed  then
 				rectfill( _x+24, _y+6, _x+27, _y+11,6)
 				rectfill( _x+24, _y+11, _x+27, _y+11,5)
 			end
 		else 
 			rectfill( _x+24, _y+9, _x+27, _y+12,7)
 			rectfill( _x+26, _y+11, _x+27, _y+12,1)
-			if(e.eyes_closed) then
+			if e.eyes_closed  then
 				rectfill( _x+24, _y+7, _x+27, _y+12,6)
 				rectfill( _x+24, _y+12, _x+27, _y+12,5)
 			end
@@ -88,7 +88,7 @@ function draw_eyes()
 		if (e.f==0 ) then
 			rectfill( _x+4, _y+8, _x+7, _y+11,7) --szemfeherje
 			rectfill( _x+4, _y+10, _x+5, _y+11,1) --pupilla
-			if(e.eyes_closed) then
+			if e.eyes_closed  then
 				rectfill( _x+4, _y+6, _x+7, _y+11,6)
 				rectfill( _x+4, _y+11, _x+7, _y+11,5)
 			end
@@ -107,7 +107,6 @@ function update_elephant_d()
 
 	ecollide_with_objects(nuts, ecollide_with_nut)
 	ecollide_with_objects(water, ecollide_with_water)
-	ecollide_with_objects(bwalls, ecollide_with_bwall)
 	ecollide_with_objects(traps, ecollide_with_trap)
 
 	frame_counter+=1
@@ -142,14 +141,14 @@ function update_elephant_d()
 		return
 	end
 
-	if (can_elephant_see_the_player() and (p.has_nut or is_on_tile(p.tx,p.ty, sprite_nums.peanut))) then
+	if can_elephant_see_the_player() and (p.has_nut or is_on_tile(p.tx,p.ty, sprite_nums.peanut)) then
 		return
 	end
 
 	if (not e.seen_player) then
 		-- is in line with nut
 		for _, n in ipairs(nuts) do
-			if(e.ty==n.ty) or (e.ty+1==n.ty) then
+			if e.ty==n.ty or e.ty+1==n.ty then
 				if (can_see_through_x(n.tx,e.tx,n.ty)) then
 					if (e.tx>n.tx) then
 						--elefant mogott
@@ -221,26 +220,20 @@ function update_elephant_d()
 end
 
 function ecollide_with_d()
-	if (e.d=='r' and d.d=='r' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'r')) or
-	   (e.d=='l' and d.d=='l' and is_tile_on_side(e.tx+1,e.ty,sprite_nums.vdoor,'l')) or
-	   (e.d=='u' and d.d=='u' and is_tile_on_side(e.tx,e.ty+1,sprite_nums.vdoor,'u')) or
-	   (e.d=='d' and d.d=='d' and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'d'))
+	if (e.d=='r' and d.d=='r' and e.seen_player and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'r')) or
+	   (e.d=='l' and d.d=='l' and e.seen_player and is_tile_on_side(e.tx+1,e.ty,sprite_nums.vdoor,'l')) or
+	   (e.d=='u' and d.d=='u' and e.seen_player and is_tile_on_side(e.tx,e.ty+1,sprite_nums.vdoor,'u')) or
+	   (e.d=='d' and d.d=='d' and e.seen_player and is_tile_on_side(e.tx,e.ty,sprite_nums.vdoor,'d'))
 	then		
 		e.finish=true
 	end
 end
 
 function update_elephant() 
+	ecollide_with_d()
 
-	if (e.seen_player) then
-		if (e.d=='r' and not ecan_move('r')) or
-		   (e.d=='l' and not ecan_move('l')) or
-		   (e.d=='u' and not ecan_move('u')) or
-		   (e.d=='d' and not ecan_move('d'))
-		then
-			e.seen_player=false
-		end
-	end
+	
+	ecollide_with_objects(bwalls, ecollide_with_bwall)
 
 	if e.scared then
 		--e.sprite=e.scared_sprite
@@ -265,7 +258,6 @@ function update_elephant()
 
 	e.vegtelen+=1
 	move_elephant()
-	ecollide_with_d()
 	
 	if not e.finish then
 		if (e.x%tile_size==0 and e.y%tile_size==0) then
@@ -319,6 +311,16 @@ end
 function move_elephant()
 
 	e.anim_speed=10
+
+	if (e.seen_player) then
+		if (e.d=='r' and not ecan_move('r')) or
+		   (e.d=='l' and not ecan_move('l')) or
+		   (e.d=='u' and not ecan_move('u')) or
+		   (e.d=='d' and not ecan_move('d'))
+		then
+			e.seen_player=false
+		end
+	end
 	
 	if (e.finish) then
 		if (e.d=='r') then
@@ -342,22 +344,22 @@ function move_elephant()
 	e.scared_anim_played_up=update_scare('u',e.scared_anim_played_up)
 	e.scared_anim_played_down=update_scare('d',e.scared_anim_played_down)
 
-	if (e.d=='r') and ecan_move('r') and (e.should_move or e.seen_player)
+	if (e.d=='r') and ecan_move('r') and really_should_move()
 		then --jobbra
 		spawntrail(e.x,e.y+32,2,2,5,6,epart)
 		e.x+=e.spd
 		e.anim_speed=5
-	elseif (e.d=='l') and ecan_move('l') and (e.should_move or e.seen_player)
+	elseif (e.d=='l') and ecan_move('l') and really_should_move()
 		then --balra
 			spawntrail(e.x+32,e.y+32,2,2,5,6,epart)
 		e.x-=e.spd
 		e.anim_speed=5
-	elseif (e.d=='u') and ecan_move('u') and (e.should_move or e.seen_player)
+	elseif (e.d=='u') and ecan_move('u') and really_should_move()
 		then --fel
 			spawntrail(e.x+16,e.y+32,8,8,5,6,epart)
 		e.y-=e.spd
 		e.anim_speed=5
-	elseif (e.d=='d') and ecan_move('d') and (e.should_move or e.seen_player)
+	elseif (e.d=='d') and ecan_move('d') and really_should_move()
 		then --le
 			spawntrail(e.x+16,e.y,8,8,5,6,epart)
 		e.y+=e.spd
@@ -390,4 +392,8 @@ function ecan_move(d)
 		return false
 	end
 	return true
+end
+
+function really_should_move()
+	return e.should_move or e.seen_player
 end

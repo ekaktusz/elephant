@@ -138,17 +138,16 @@ end
 
 function is_on_tile(tx,ty,letter)
 	--nut
-
 	if letter==sprite_nums.peanut then
-		is_on_objects(tx,ty,nuts)
+		return is_on_objects(tx,ty,nuts)
 	end
 	--button
 	if letter==sprite_nums.button1 then
-		is_on_object(tx,ty,b)
+		return is_on_object(tx,ty,b)
 	end
 	--grid
 	if (letter==sprite_nums.grid1) then
-		is_on_objects(grids)
+		return is_on_objects(grids)
 	end
 	--door
 	if letter==sprite_nums.vdoor then

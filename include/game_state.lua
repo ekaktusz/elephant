@@ -96,6 +96,7 @@ function draw_game()
 	drawparts(ppart)
 	draw_objects(cheeses)
 	draw_objects(eaten_cheeses)
+	draw_objects(nuts)
 	if not game_over then --ilyenkor a csapda van csak
 		draw_player()
 	end
@@ -103,7 +104,6 @@ function draw_game()
 	drawparts(epart)
 	draw_traps()
 	draw_elephant()
-	draw_objects(nuts)
 	draw_water()
 	draw_h()
 	draw_map_edge()
@@ -127,7 +127,6 @@ function draw_game()
 	if not loaded() then
 		load_anim(anim_timer)
 	end
-
 
 	if finished then
 		load_anim(finish_anim_timer)

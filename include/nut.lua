@@ -22,9 +22,12 @@ function ecollide_with_nut(n)
 end
 
 function place_nut()
-	if (p.has_nut) and not is_on_tile(p.tx,p.ty,sprite_nums.peanut) and not is_on_tile(p.tx,p.ty,sprite_nums.grid1) 
-	and not is_on_tile(p.tx,p.ty,sprite_nums.hhole) and not is_on_tile(p.tx,p.ty,sprite_nums.vhole) 
-	 and not is_on_tile(p.tx,p.ty,sprite_nums.button1) then
+	if (p.has_nut) 
+	and not is_on_objects(p.tx,p.ty,nuts) 
+	and not is_on_objects(p.tx,p.ty,grids) 
+	and not is_on_tile(p.tx,p.ty,sprite_nums.hhole) 
+	and not is_on_tile(p.tx,p.ty,sprite_nums.vhole) 
+	and not is_on_tile(p.tx,p.ty,sprite_nums.button1) then
 		nuts[#nuts+1] = {tx=p.tx, ty=p.ty, sprt=sprite_nums.peanut}
 		p.has_nut=false
 	end
