@@ -1,5 +1,5 @@
 --map
-n_lvls=28
+n_lvls=29
 sprite_nums={
 	carpet=234,
 	wall=128,

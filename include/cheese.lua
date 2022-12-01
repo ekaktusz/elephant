@@ -12,5 +12,8 @@ function pcollide_with_cheese(c)
         del(cheeses,c)
         sfx(8)
         p.cheese_eat_time=50
+        if current_lvl==n_lvls and #cheeses==0 then
+            finished=true
+        end
     end
 end

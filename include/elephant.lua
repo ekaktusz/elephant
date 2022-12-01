@@ -183,6 +183,10 @@ function update_elephant_d()
 		end
 	end
 
+	if (current_lvl==n_lvls) then
+		return
+	end
+
 	-- is in line with player
 	if(e.ty==p.ty) or (e.ty+1==p.ty) then
 		if (can_see_through_x(p.tx,e.tx,p.ty)) then

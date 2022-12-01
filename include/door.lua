@@ -5,6 +5,9 @@ function make_door()
 		d='r' --direction
 	}
 	--door direction
+	if (current_lvl==n_lvls) then
+		return
+	end
 	tmp=get_all_tile_pos(sprite_nums.vdoor)
 	tty=tmp[2].ty
 	ttx=tmp[2].tx
