@@ -51,7 +51,7 @@ function draw_deadtrap()
 end
 
 function ecollide_with_trap(t)
-    btraps[#btraps+1] = {tx=t.tx, ty=t.ty, dt=destroy_time}
+    btraps[#btraps+1] = {tx=t.tx, ty=t.ty, dt=destroy_time, sprt=sprite_nums.dtrap}
     del(traps,t) 
 end
 

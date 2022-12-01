@@ -32,6 +32,7 @@ sprite_nums={
 	trap_closed1=166,
 	trap_closed2=232,
 	trap_closed3=224,
+	dtrap=226,
 	player_left1=0,
 	player_left2=2,
 	player_top1=32,

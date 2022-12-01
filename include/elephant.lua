@@ -105,9 +105,11 @@ end
 
 function update_elephant_d()
 
-	if (can_elephant_see_the_player() and (p.has_nut or is_on_tile(p.tx,p.ty, sprite_nums.peanut))) then
-		return
-	end
+	
+	ecollide_with_objects(nuts, ecollide_with_nut)
+	ecollide_with_objects(water, ecollide_with_water)
+	ecollide_with_objects(bwalls, ecollide_with_bwall)
+	ecollide_with_objects(traps, ecollide_with_trap)
 
 	frame_counter+=1
 	if (frame_counter%120<=5) then
@@ -115,11 +117,7 @@ function update_elephant_d()
 	else
 		e.eyes_closed=false
 	end
-	ecollide_with_objects(nuts, ecollide_with_nut)
-	ecollide_with_objects(water, ecollide_with_water)
-	ecollide_with_objects(bwalls, ecollide_with_bwall)
-	ecollide_with_objects(traps, ecollide_with_trap)
-	
+
 	if e.hit_freeze then
 		--wait 10 frame
 		if (e.last_horizontal_dir=='r') then
@@ -142,6 +140,10 @@ function update_elephant_d()
 	end
 
 	if e.hit_freeze or e.scared then
+		return
+	end
+
+	if (can_elephant_see_the_player() and (p.has_nut or is_on_tile(p.tx,p.ty, sprite_nums.peanut))) then
 		return
 	end
 
