@@ -49,6 +49,7 @@ function update_game()
 	end
 
 	if loaded() and not game_over then
+		tb_update()
 		update_player()
 		if (p.first_move) then
 			update_elephant()
@@ -72,7 +73,6 @@ function update_game()
 		assisted_view=not assisted_view
 	end
 
-	if current_lvl==1 then tb_update() end
 	
 	updateparts(part)
 end
