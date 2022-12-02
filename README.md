@@ -7,5 +7,8 @@ Small puzzle game created in PICO-8 for [Github Game Off 2022](https://itch.io/j
 This was our the first time with a game jam and with PICO-8 as well. It's written entirely in Lua. Feel free to use our code to your project.
 
 ## Screenshots
+![Alt text](./assets/elephant_0.gif)
+![Alt text](./assets/elephant_1.gif)
+![Alt text](./assets/elephant_2.gif)
 ![Alt text](./assets/screenshot(4).png)
 ![Alt text](./assets/screenshot(1).png)
